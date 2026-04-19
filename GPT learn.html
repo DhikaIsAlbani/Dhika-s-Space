@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dhika's Space</title>
+
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #eaeaea;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+    }
+
+    .Header {
+      font-size: 1em;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 0;
+      background-color: #0f0f0f;
+      padding: 0;
+      z-index: 1000;  
+      backdrop-filter: blur(6px);
+    }
+
+    .Intro p {
+      max-width: 500px;
+      margin: auto;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+    .Intro h2 {
+      text-align: left;
+      opacity: 1;
+      border-left: 2px solid #456;
+      padding-left: 10px;
+      box-sizing: border-box;
+      margin: 20px 0;
+    }
+    .About {
+      margin: 40px auto;
+      max-width: 600px;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    }
+    .About h2 {
+      border-left: 2px solid #456;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+    .About p {
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+    .bio {
+      margin-top: 15px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255, 250, 250, 0.1);
+    }
+    .bio p {
+      margin: 5px 0;
+    }
+    .Journey {
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.8s ease;
+    }
+    .Journey h2 {
+      border-left: 2px solid #456;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+    .Journey p {
+      margin-top: 10px;
+    }
+    .log {
+      margin-bottom: 20px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .date {
+      font-size: 0.85em;
+      opacity: 0.5;
+      margin-bottom: 5px;
+    }
+    .log p {
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+    .log:hover {
+  border-left: 1px solid rgba(120,180,255,0.3);
+  transition: 0.3s;
+}
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus {
+  outline: none;
+}
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: rgba(120, 180, 255, 0.8);
+  border: 1px solid rgba(120, 180, 255, 0.2);
+  color: #cfe9ff;
+  text-decoration: none;
+  font-size: 0.9em;
+  backdrop-filter: blur(4px);
+  transition: all 0.4s ease;
+}
+.btn:hover {
+  background: rgba(120, 180, 255, 0.15);
+  border: 1px solid rgba(120, 180, 255, 0.4);
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: scale(0.95);
+  opacity: 0.2;
+}
+    .bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+.bg span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: rgba(203, 239, 255, 0.08);
+  backdrop-filter: blur(2px);
+  animation: floatUp linear infinite;
+}
+
+/* Animasi lebih natural + fade */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(50vh) translateX(var(--drift));
+  }
+
+  80% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateY(-10vh) translateX(calc(var(--drift) * -1));
+    opacity: 0;
+  }
+}
+.nav-ball {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  opacity: 0;
+  border-radius: 50%;
+  background: rgba(120, 180, 255, 0.25);
+  border: 0.5px solid rgba(120, 180, 255, 0.35);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  z-index: 999;
+  -webkit-tap-highlight-color: transparent;
+  animation: floatBall 4s ease-in-out infinite;
+  transform: translateY(80px) scale(0.8);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.nav-ball.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+@keyframes floatBall {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -5px; }
+}
+.nav-ball::after {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 38%;
+  height: 22%;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  filter: blur(3px);
+  transform: rotate(-30deg);
+}
+.nav-ball:hover {
+  background: rgba(120, 180, 255, 0.2);
+  transform: scale(1,1);
+  box-shadow: 0 0 15px rgba(120, 180, 255, 0.3)
+}
+.nav-ball:active {
+  transform: scale(0.9);
+}
+.nav-menu {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+}
+.menu-item {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(120, 180, 255, 0.2);
+  background: rgba(120, 180, 255, 0.12);
+  backdrop-filter: blur(6px);
+  display: flex;
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  color: #cfe9ff;
+  transform: scale(0.4) translateY(10px);
+  transition: transform 0.35s cubic-bezier(.2,1.4,.4,1), opacity 0.3 ease, background 0.3 ease;
+}
+.nav-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav-menu.show .menu-item {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+.menu-item.active {
+  background: rgba(120, 180, 255, 0.4);
+  box-shadow: 0 0 15px rgba(120, 180, 255, 0.5);
+  transform: scale(0.9);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); } 50% {transform: scale(1.05); }
+}
+.menu-item:hover {
+  background: rgba(120, 180, 255, 0.25);
+  transform: scale(1.15);
+  box-shadow: 0 0 12px rgba(120, 180, 255, 0.3);
+}
+.nav-menu.closing .menu-item {
+  transform: scale(0.4) translateY(10px);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+.nav-menu.show .menu-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.nav-menu.show .menu-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.nav-menu.show .menu-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.nav-menu.show .menu-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+</style>
+</head>
+
+<body>
+<div class="bg">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+  <section class="Header">
+      <h1>Dhika's Coding Journey</h1>
+<hr>
+  </section>
+<div class="Intro">
+  <h2>Introduction</h2>
+  <p>
+    I'm learning coding slowly, not to rush, but to understand.  <br>
+    Every line I write is part of a process — sometimes messy, sometimes clear.  <br>
+    But I keep going, step by step, building something real in my own way.
+  </p>
+</div>
+<div class="About">
+  <h2>About me</h2>
+  <p>    My name is <em>Dhika Albani.</em> I'm currently a student, exploring coding, <br>
+    philosophy, and self-development step by step.</p>
+    <div class="bio">
+      <p><strong>Age:</strong> 14</p>
+      <p><strong>Focus:</strong> Coding, mindset, growth</p>
+      <p><strong>Style:</strong> Calm, Aware, Consistent</p>
+      <p><strong>Goal:</strong> Build myself before building big things.</p>
+      <p><strong>Favorites:</strong> Sky, Water, Air</p>
+    </div>
+</div>
+<div class="Journey">
+  <h2>Journey log</h2>
+  <div class="log">
+    <p class="date">April 19, 2026</p>
+    <p>Started building this page. <br> Learning how to control layout, animation. And creating something calm and personal.</p>
+  </div>
+  <div class="log">
+    <p class="date">April 18, 2026</p>
+    <p>Learned about focus and awareness.<br> Not rushing, but moving step by step without lose of consistency.</p>
+  </div>
+  <p>View my Growth System(GS) for more: <a href="https://www.notion.so/ca867815d15846e0b5b6165a872fdee2" target="_blank" class="btn"> View my Growth System.</a>
+  </p>
+</div>
+<div class="nav-ball"></div>
+<div class="nav-menu">
+  <div class="menu-item" onclick="scrollToTop()" >↑</div>
+  <div class="menu-item" onclick="scrollToSection('.About')">A</div>
+  <div class="menu-item" onclick="scrollToSection('.Journey')">J</div>
+  <div class="menu-item" onclick="toggleMusic()">♪</div>
+</div>
+<audio id="bg-music" loop>
+  <source src="https://audio.jukehost.co.uk/Gs8RCV6TZ5olRy0S10GvwjD5QiR2RAj9" type="audio/mpeg">
+</audio>
+</body>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const bg = document.querySelector(".bg");
+    function createBubble() {
+      const bubble = document.createElement("span");
+      
+      const size = Math.random() * 20 + 10;
+      bubble.style.width = size + "px";
+      bubble.style.height = size + "px";
+      bubble.style.left = Math.random() * 100 + "%";
+      
+      bubble.style.animationDuration = (Math.random() * 10 + 10) + "s";
+      
+      const drift = (Math.random() * 100 - 50) + "px"; 
+      bubble.style.setProperty("--drift", drift);
+      
+      const depth = Math.random();
+      bubble.style.opacity = depth * 0.6;
+      bubble.style.filter = "blur(" + (depth * 4) + "px)";
+      bubble.style.zIndex = Math.floor(depth * -10);
+      
+      bg.appendChild(bubble);
+      
+      setTimeout(() => {
+        bubble.remove();
+      }, 20000);
+    }
+    setInterval(createBubble, 800);
+  });
+  const journey = document.querySelector(".Journey");
+  window.addEventListener("scroll", () => { 
+    const rect = journey.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      journey.style.opacity = "1";
+      journey.style.transform = "translateX(0)";
+    }
+  })
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+  const navBall = document.querySelector(".nav-ball");
+  window.addEventListener("scroll", () => { 
+    if (window.scrollY > 200) { navBall.classList.add("show");} else { navBall.classList.remove("show");}
+  })
+  const navMenu = document.querySelector(".nav-menu");
+  navBall.addEventListener("click", () => { navMenu.classList.toggle("show");
+  });
+  function scrollToSection(selector) { document.querySelector(selector).scrollIntoView({
+    behavior: "smooth"
+  });
+  }
+  document.addEventListener("click", (e) => {
+    if (!navBall.contains(e.target) && ! navMenu.contains(e.target)) {
+      navMenu.classList.add("closing");
+      setTimeout(() => {
+      navMenu.classList.remove("show");
+      navMenu.classList.remove("closing");
+      }, 200);
+    }
+  })
+// ===== MUSIC CONTROL =====
+const music = document.getElementById("bg-music");
+const menuItems = document.querySelectorAll(".menu-item");
+const musicBtn = menuItems[3];
+
+function toggleMusic() {
+  let fadeInterval = null;
+  if (music.paused) {
+    music.volume = 0;
+    music.play().catch(() => {});
+
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+      vol += 0.05;
+
+      if (vol >= 1) {
+        vol = 1;
+        clearInterval(fadeIn);
+      }
+
+      music.volume = vol;
+    }, 50);
+
+    musicBtn.classList.add("active");
+
+  } else {
+    let vol = music.volume;
+
+    const fadeOut = setInterval(() => {
+      vol -= 0.05;
+
+      if (vol <= 0) {
+        vol = 0;
+        clearInterval(fadeOut);
+        music.pause();
+      }
+
+      music.volume = vol;
+    }, 50);
+
+    musicBtn.classList.remove("active");
+  }
+}
+
+// ===== MENU CLICK EFFECT =====
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+
+    // reset semua kecuali music
+    menuItems.forEach((i, iIndex) => {
+      if (iIndex !== 3) i.classList.remove("active");
+    });
+
+    // kalau bukan music → highlight sebentar
+    if (index !== 3) {
+      item.classList.add("active");
+
+      setTimeout(() => {
+        item.classList.remove("active");
+      }, 600);
+    }
+  });
+});
+  </script>
+</html>
