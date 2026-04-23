@@ -1,0 +1,1 @@
+Hello. This is Dhika Albani, i make this code for the first time as a student in 14. Working as a first portofolio from me, i started learning HTML by now but later i may learn even wider programming languages such as Python or learning even more about technology. For now, is started from a easier one to take step and steps.
