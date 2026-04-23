@@ -1,1039 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Franz Kafka: The Metamorphosis | Class Presentation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-dark: #0f0f0f;
-            --bg-panel: #1a1a1a;
-            --bg-card: #252525;
-            --text-primary: #e8e6e3;
-            --text-secondary: #a0a0a0;
-            --accent-orange: #ff6b35;
-            --accent-gold: #d4a574;
-            --border-color: #333;
-            --hover-bg: #2a2a2a;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.4;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(212, 165, 116, 0.1) 0%, transparent 50%);
-            animation: rotate 60s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Main Container */
-        .app-container {
-            position: relative;
-            z-index: 1;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--text-primary);
-        }
-
-        .logo span {
-            color: var(--accent-orange);
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-left: 15px;
-            font-weight: 300;
-        }
-
-        .header-controls {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .search-btn, .profile-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        .search-btn:hover, .profile-btn:hover {
-            color: var(--text-primary);
-        }
-
-        .profile-img {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        /* Main Layout */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 30px;
-            flex: 1;
-        }
-
-        /* Sidebar Navigation */
-        .sidebar {
-            background: var(--bg-panel);
-            border-radius: 12px;
-            padding: 20px;
-            height: fit-content;
-            position: sticky;
-            top: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-
-        .nav-item:hover {
-            background: var(--hover-bg);
-            transform: translateX(5px);
-        }
-
-        .nav-item.active {
-            background: rgba(255, 107, 53, 0.1);
-            border-left-color: var(--accent-orange);
-        }
-
-        .nav-item.active .nav-number {
-            color: var(--accent-orange);
-        }
-
-        .nav-item.active .nav-title {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-        }
-
-        .nav-content {
-            flex: 1;
-        }
-
-        .nav-number {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .nav-title {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .nav-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            opacity: 0.7;
-            margin-top: 2px;
-        }
-
-        /* Content Area */
-        .content-area {
-            background: var(--bg-panel);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .slide-container {
-            padding: 40px;
-            min-height: 600px;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .slide-container.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .slide-header {
-            margin-bottom: 30px;
-        }
-
-        .part-label {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            color: var(--accent-orange);
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .slide-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .slide-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        .text-content {
-            space-y: 20px;
-        }
-
-        .bullet-list {
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .bullet-list li {
-            padding: 12px 0;
-            padding-left: 30px;
-            position: relative;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
-        }
-
-        .bullet-list li:hover {
-            color: var(--text-primary);
-            padding-left: 35px;
-        }
-
-        .bullet-list li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent-orange);
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        .image-container {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            filter: contrast(1.1) brightness(0.9);
-        }
-
-        .image-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        /* Navigation Controls */
-        .slide-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            border-top: 1px solid var(--border-color);
-            background: rgba(0,0,0,0.2);
-        }
-
-        .nav-button {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .nav-button:hover {
-            background: var(--hover-bg);
-            color: var(--text-primary);
-            border-color: var(--accent-orange);
-        }
-
-        .nav-button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .slide-indicators {
-            display: flex;
-            gap: 8px;
-        }
-
-        .indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border-color);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .indicator.active {
-            background: var(--accent-orange);
-            width: 24px;
-            border-radius: 4px;
-        }
-
-        .screen-controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .control-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-        }
-
-        .control-btn:hover {
-            color: var(--text-primary);
-        }
-
-        /* Content Styles for Different Sections */
-        .content-block {
-            margin-bottom: 25px;
-        }
-
-        .content-block h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            color: var(--accent-gold);
-            margin-bottom: 12px;
-        }
-
-        .content-block p {
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 15px;
-        }
-
-        .highlight-box {
-            background: rgba(255, 107, 53, 0.1);
-            border-left: 3px solid var(--accent-orange);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .quote-block {
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            border-left: 3px solid var(--accent-gold);
-            padding-left: 20px;
-            margin: 30px 0;
-            line-height: 1.6;
-        }
-
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .theme-card {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .theme-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-orange);
-        }
-
-        .theme-card h4 {
-            color: var(--accent-orange);
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-        }
-
-        .symbol-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .symbol-item {
-            background: var(--bg-card);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-
-        .symbol-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .bibliography-list {
-            list-style: none;
-        }
-
-        .bibliography-list li {
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        .bibliography-list li strong {
-            color: var(--text-primary);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                position: relative;
-                top: 0;
-                display: flex;
-                overflow-x: auto;
-                gap: 10px;
-            }
-            
-            .nav-item {
-                min-width: 200px;
-                margin-bottom: 0;
-            }
-            
-            .slide-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Fullscreen Mode */
-        .fullscreen .app-container {
-            max-width: 100%;
-            padding: 0;
-        }
-        
-        .fullscreen .header,
-        .fullscreen .sidebar {
-            display: none;
-        }
-        
-        .fullscreen .content-area {
-            border-radius: 0;
-            height: 100vh;
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-orange);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dhika's Space</title>
+
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #eaeaea;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+    }
+
+    .Header {
+      font-size: 1em;
+      margin-bottom: 20px;
+      position: sticky;
+      top: 0;
+      background-color: #0f0f0f;
+      padding: 0;
+      z-index: 1000;  
+      backdrop-filter: blur(6px);
+    }
+
+    .Intro p {
+      max-width: 500px;
+      margin: auto;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+    .Intro h2 {
+      text-align: left;
+      opacity: 1;
+      border-left: 2px solid #456;
+      padding-left: 10px;
+      max-width: 600px;
+      margin: 40px auto;
+    }
+    .About {
+      margin: 40px auto;
+      max-width: 600px;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    }
+    .About h2 {
+      border-left: 2px solid #456;
+      padding-left: 10px;
+      margin-bottom: 10px;
+    }
+    .About p {
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+    .bio {
+      margin-top: 15px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255, 250, 250, 0.1);
+    }
+    .bio p {
+      margin: 5px 0;
+    }
+    .Journey {
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: left;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.8s ease;
+    }
+    .Journey h2 {
+      border-left: 2px solid #456;
+      padding-left: 10px;
+      margin-bottom: 15px;
+    }
+    .Journey p {
+      margin-top: 10px;
+    }
+    .log {
+      margin-bottom: 20px;
+      padding-left: 10px;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .date {
+      font-size: 0.85em;
+      opacity: 0.5;
+      margin-bottom: 5px;
+    }
+    .log p {
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+    .log:hover {
+  border-left: 1px solid rgba(120,180,255,0.3);
+  transition: 0.3s;
+}
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a:focus {
+  outline: none;
+}
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: rgba(120, 180, 255, 0.8);
+  border: 1px solid rgba(120, 180, 255, 0.2);
+  color: #cfe9ff;
+  text-decoration: none;
+  font-size: 0.9em;
+  backdrop-filter: blur(4px);
+  transition: all 0.4s ease;
+}
+.btn:hover {
+  background: rgba(120, 180, 255, 0.15);
+  border: 1px solid rgba(120, 180, 255, 0.4);
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: scale(0.95);
+  opacity: 0.2;
+}
+    .bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+.bg span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: rgba(203, 239, 255, 0.08);
+  backdrop-filter: blur(2px);
+  animation: floatUp linear infinite;
+}
+
+/* Animasi lebih natural + fade */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(50vh) translateX(var(--drift));
+  }
+
+  80% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateY(-10vh) translateX(calc(var(--drift) * -1));
+    opacity: 0;
+  }
+}
+.nav-ball {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  opacity: 0;
+  border-radius: 50%;
+  background: rgba(120, 180, 255, 0.25);
+  border: 0.5px solid rgba(120, 180, 255, 0.35);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  z-index: 999;
+  -webkit-tap-highlight-color: transparent;
+  animation: floatBall 4s ease-in-out infinite;
+  transform: translateY(80px) scale(0.8);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.nav-ball.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+@keyframes floatBall {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -5px; }
+}
+.nav-ball::after {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 38%;
+  height: 22%;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  filter: blur(3px);
+  transform: rotate(-30deg);
+}
+.nav-ball:hover {
+  background: rgba(120, 180, 255, 0.2);
+  transform: scale(1,1);
+  box-shadow: 0 0 15px rgba(120, 180, 255, 0.3)
+}
+.nav-ball:active {
+  transform: scale(0.9);
+}
+.nav-menu {
+  position: fixed;
+  bottom: 80px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+}
+.menu-item {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(120, 180, 255, 0.2);
+  background: rgba(120, 180, 255, 0.12);
+  backdrop-filter: blur(6px);
+  display: flex;
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  color: #cfe9ff;
+  transform: scale(0.4) translateY(10px);
+  transition: transform 0.35s cubic-bezier(.2,1.4,.4,1), opacity 0.3 ease, background 0.3 ease;
+}
+.nav-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav-menu.show .menu-item {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+.menu-item.active {
+  background: rgba(120, 180, 255, 0.4);
+  box-shadow: 0 0 15px rgba(120, 180, 255, 0.5);
+  transform: scale(0.9);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); } 50% {transform: scale(1.05); }
+}
+.menu-item:hover {
+  background: rgba(120, 180, 255, 0.25);
+  transform: scale(1.15);
+  box-shadow: 0 0 12px rgba(120, 180, 255, 0.3);
+}
+.nav-menu.closing .menu-item {
+  transform: scale(0.4) translateY(10px);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+.nav-menu.show .menu-item:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.nav-menu.show .menu-item:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.nav-menu.show .menu-item:nth-child(3) {
+  transition-delay: 0.15s;
+}
+.nav-menu.show .menu-item:nth-child(4) {
+  transition-delay: 0.2s;
+}
+</style>
 </head>
+
 <body>
-    <div class="bg-animation"></div>
-    
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div style="display: flex; align-items: baseline;">
-                <div class="logo">FRANZ KAFKA: <span>THE METAMORPHOSIS</span></div>
-                <span class="subtitle">| Class Presentation</span>
-            </div>
-            <div class="header-controls">
-                <button class="search-btn">🔍</button>
-                <div class="profile-btn">
-                    <div class="profile-img">S</div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main Layout -->
-        <div class="main-layout">
-            <!-- Sidebar Navigation -->
-            <nav class="sidebar">
-                <div class="nav-item active" onclick="goToSlide(0)">
-                    <div class="nav-icon">🐞</div>
-                    <div class="nav-content">
-                        <div class="nav-number">1. INTRODUCTION</div>
-                        <div class="nav-title">Kafka & Novella</div>
-                    </div>
-                </div>
-                
-                <div class="nav-item" onclick="goToSlide(1)">
-                    <div class="nav-icon">🪲</div>
-                    <div class="nav-content">
-                        <div class="nav-number">2. THE METAMORPHOSIS</div>
-                        <div class="nav-title">Ch. 1: The Transformation</div>
-                    </div>
-                </div>
-                
-                <div class="nav-item" onclick="goToSlide(2)">
-                    <div class="nav-icon">🚪</div>
-                    <div class="nav-content">
-                        <div class="nav-number">3. GREGOR'S ISOLATION</div>
-                        <div class="nav-title">Ch. 2: Family Reaction</div>
-                    </div>
-                </div>
-                
-                <div class="nav-item" onclick="goToSlide(3)">
-                    <div class="nav-icon">🍎</div>
-                    <div class="nav-content">
-                        <div class="nav-number">4. DECAY & ACCEPTANCE</div>
-                        <div class="nav-title">Ch. 3: The End</div>
-                    </div>
-                </div>
-                
-                <div class="nav-item" onclick="goToSlide(4)">
-                    <div class="nav-icon">🎭</div>
-                    <div class="nav-content">
-                        <div class="nav-number">5. THEMES</div>
-                        <div class="nav-title">Alienation, Absurdity</div>
-                    </div>
-                </div>
-                
-                <div class="nav-item" onclick="goToSlide(5)">
-                    <div class="nav-icon">🗝️</div>
-                    <div class="nav-content">
-                        <div class="nav-number">6. SYMBOLISM</div>
-                        <div class="nav-title">Key Motifs</div>
-                    </div>
-                </div>
-                
-                <div class="nav-item" onclick="goToSlide(6)">
-                    <div class="nav-icon">✓</div>
-                    <div class="nav-content">
-                        <div class="nav-number">7. CONCLUSION</div>
-                        <div class="nav-title">Final Thoughts</div>
-                    </div>
-                </div>
-                
-                <div class="nav-item" onclick="goToSlide(7)">
-                    <div class="nav-icon">📚</div>
-                    <div class="nav-content">
-                        <div class="nav-number">8. BIBLIOGRAPHY</div>
-                        <div class="nav-title">Sources</div>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Content Area -->
-            <main class="content-area">
-                <!-- Slide 1: Introduction -->
-                <div class="slide-container active" id="slide-0">
-                    <div class="slide-header">
-                        <div class="part-label">Part 1: Introduction</div>
-                        <h1 class="slide-title">FRANZ KAFKA &<br>THE METAMORPHOSIS</h1>
-                    </div>
-                    <div class="slide-content">
-                        <div class="text-content">
-                            <div class="content-block">
-                                <h3>About the Author</h3>
-                                <p>Franz Kafka (1883–1924) was a German-speaking Jewish writer born in Prague, then part of the Austro-Hungarian Empire. He worked as an insurance clerk by day, writing his surreal, existential masterpieces at night.</p>
-                                <p>His writing explores themes of alienation, guilt, and the absurdity of modern bureaucracy—experiences drawn from his own strained relationship with his authoritarian father and his tedious office job.</p>
-                            </div>
-                            
-                            <div class="content-block">
-                                <h3>The Novella</h3>
-                                <p>Written in 1912 and published in 1915, *The Metamorphosis* is one of the few works Kafka published during his lifetime. The story opens with one of literature's most famous sentences:</p>
-                                <div class="quote-block">
-                                    "When Gregor Samsa woke up one morning from unsettling dreams, he found himself changed in his bed into a monstrous vermin."
-                                </div>
-                            </div>
-                            
-                            <ul class="bullet-list">
-                                <li>Genre: Absurdist/Existential Literature</li>
-                                <li>Setting: The Samsa family apartment</li>
-                                <li>Protagonist: Gregor Samsa, traveling salesman</li>
-                                <li>Central Conflict: Physical and psychological transformation</li>
-                            </ul>
-                        </div>
-                        <div class="image-container">
-                            <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=800&q=80" alt="Vintage typewriter representing Kafka's writing" style="height: 100%; object-fit: cover;">
-                            <div class="image-overlay">Kafka's manuscript of The Metamorphosis</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2: The Transformation -->
-                <div class="slide-container" id="slide-1">
-                    <div class="slide-header">
-                        <div class="part-label">Part 2: Chapter 1</div>
-                        <h1 class="slide-title">THE TRANSFORMATION</h1>
-                    </div>
-                    <div class="slide-content">
-                        <div class="text-content">
-                            <ul class="bullet-list">
-                                <li><strong>Morning Revelation:</strong> Gregor wakes to find himself transformed into a giant insect (often translated as "vermin" or "bug")</li>
-                                <li><strong>Initial Panic:</strong> Rather than horror at his condition, his first worry is being late for work and losing his job</li>
-                                <li><strong>The Manager's Visit:</strong> His boss arrives to investigate his absence, threatening his employment</li>
-                                <li><strong>Failure to Communicate:</strong> Gregor discovers his voice has changed—his family cannot understand his speech</li>
-                                <li><strong>Forced Seclusion:</strong> After revealing himself, his father drives him back into his room with a cane and newspaper</li>
-                            </ul>
-                            
-                            <div class="highlight-box">
-                                <strong>Key Insight:</strong> Gregor's immediate concern for work over his physical transformation reveals how thoroughly his identity has been consumed by his role as breadwinner.
-                            </div>
-                        </div>
-                        <div class="image-container">
-                            <img src="https://images.unsplash.com/photo-1569396116180-210c182bedb8?w=800&q=80" alt="Dark bedroom scene with beetle concept" style="filter: sepia(0.3) contrast(1.2) brightness(0.7);">
-                            <div class="image-overlay">Gregor's room becomes his prison</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Isolation -->
-                <div class="slide-container" id="slide-2">
-                    <div class="slide-header">
-                        <div class="part-label">Part 3: Chapter 2</div>
-                        <h1 class="slide-title">GREGOR'S ISOLATION</h1>
-                    </div>
-                    <div class="slide-content">
-                        <div class="text-content">
-                            <div class="content-block">
-                                <h3>Family Dynamics Shift</h3>
-                                <p>Grete becomes Gregor's primary caretaker, bringing him food. Initially she brings milk and bread (human food), but soon realizes he prefers rotten scraps—his tastes are changing along with his body.</p>
-                            </div>
-                            
-                            <ul class="bullet-list">
-                                <li><strong>Hidden Observer:</strong> Gregor hides under the couch to avoid frightening his sister</li>
-                                <li><strong>Furniture Removal:</strong> The family decides to clear his room to give him crawling space</li>
-                                <li><strong>The Picture:</strong> Gregor clings to a framed photo of a woman in furs—his last connection to humanity</li>
-                                <li><strong>The Apple Incident:</strong> His father throws apples at him; one lodges in his back, creating a festering wound</li>
-                            </ul>
-                            
-                            <div class="quote-block">
-                                "He thought back on his family with deep emotion and love. His opinion that he must disappear was, if possible, even firmer than his sister's."
-                            </div>
-                        </div>
-                        <div class="image-container">
-                            <img src="https://images.unsplash.com/photo-1515549832467-8783363e19b6?w=800&q=80" alt="Empty chair representing isolation" style="filter: grayscale(100%) contrast(1.1);">
-                            <div class="image-overlay">The growing distance between Gregor and his family</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 4: Decay -->
-                <div class="slide-container" id="slide-3">
-                    <div class="slide-header">
-                        <div class="part-label">Part 4: Chapter 3</div>
-                        <h1 class="slide-title">DECAY & ACCEPTANCE</h1>
-                    </div>
-                    <div class="slide-content">
-                        <div class="text-content">
-                            <div class="content-block">
-                                <h3>The Final Decline</h3>
-                                <p>Months pass. The family takes in lodgers to survive financially. Gregor becomes a "thing" to them—neglected, starving, and slowly dying from his infected wound.</p>
-                            </div>
-                            
-                            <ul class="bullet-list">
-                                <li><strong>The Violin:</strong> Grete plays for the lodgers; Gregor is drawn out by the music, showing he retains his human appreciation for art</li>
-                                <li><strong>The Confrontation:</strong> The lodgers see Gregor and threaten to leave without paying</li>
-                                <li><strong>The Betrayal:</strong> Grete insists "we must try to get rid of it"—referring to her brother as an object</li>
-                                <li><strong>Death:</strong> Gregor returns to his room and dies quietly overnight, accepting that he is a burden</li>
-                                <li><strong>Relief:</strong> The family feels liberated; they take a day off work and plan for Grete's marriage</li>
-                            </ul>
-                        </div>
-                        <div class="image-container">
-                            <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=800&q=80" alt="Wilting flower representing decay" style="filter: sepia(0.4) brightness(0.6);">
-                            <div class="image-overlay">"His body was completely flat and dry" — Kafka's detached description of Gregor's death</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 5: Themes -->
-                <div class="slide-container" id="slide-4">
-                    <div class="slide-header">
-                        <div class="part-label">Part 5: Analysis</div>
-                        <h1 class="slide-title">MAJOR THEMES</h1>
-                    </div>
-                    <div class="slide-content" style="grid-template-columns: 1fr;">
-                        <div class="two-column">
-                            <div class="theme-card">
-                                <h4>Alienation & Isolation</h4>
-                                <p>Gregor's physical transformation literalizes the emotional alienation he already felt as a traveling salesman. His family locks him away, and even his sister eventually rejects him.</p>
-                            </div>
-                            
-                            <div class="theme-card">
-                                <h4>The Absurdity of Life</h4>
-                                <p>Kafka presents the impossible transformation as mundane fact. No explanation is given for why Gregor changes, reflecting life's random cruelty and lack of inherent meaning.</p>
-                            </div>
-                            
-                            <div class="theme-card">
-                                <h4>Economic Dehumanization</h4>
-                                <p>Gregor is valued only for his earning potential. Once he cannot work, he becomes disposable. The story critiques how capitalism reduces human beings to their economic function.</p>
-                            </div>
-                            
-                            <div class="theme-card">
-                                <h4>Family & Conditional Love</h4>
-                                <p>The Samsas' love proves conditional on Gregor's utility. His self-sacrifice (working to pay off their debts) is forgotten once he becomes a burden.</p>
-                            </div>
-                            
-                            <div class="theme-card">
-                                <h4>Guilt & Self-Sacrifice</h4>
-                                <p>Even as an insect, Gregor worries about inconveniencing his family. His acceptance of death is the ultimate self-sacrifice—removing himself to ease their burden.</p>
-                            </div>
-                            
-                            <div class="theme-card">
-                                <h4>Identity Crisis</h4>
-                                <p>Who is Gregor if not the provider? His struggle to retain his humanity while his body changes questions what fundamentally makes us human.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 6: Symbolism -->
-                <div class="slide-container" id="slide-5">
-                    <div class="slide-header">
-                        <div class="part-label">Part 6: Symbols</div>
-                        <h1 class="slide-title">KEY SYMBOLISM</h1>
-                    </div>
-                    <div class="slide-content" style="grid-template-columns: 1fr;">
-                        <div class="symbol-grid">
-                            <div class="symbol-item">
-                                <div class="symbol-icon">🪲</div>
-                                <h4>The Insect</h4>
-                                <p>Represents Gregor's feelings of worthlessness and his low status within his family. Also symbolizes the "vermin" of the working class in modern society.</p>
-                            </div>
-                            
-                            <div class="symbol-item">
-                                <div class="symbol-icon">🍎</div>
-                                <h4>The Apple</h4>
-                                <p>Biblical allusion to the Fall of Man. The apple lodged in Gregor's back becomes a festering wound, symbolizing the family's rejection and original sin of filial betrayal.</p>
-                            </div>
-                            
-                            <div class="symbol-item">
-                                <div class="symbol-icon">🖼️</div>
-                                <h4>The Woman in Furs</h4>
-                                <p>The picture Gregor clings to represents his suppressed desires for beauty, sensuality, and escape from his dreary existence.</p>
-                            </div>
-                            
-                            <div class="symbol-item">
-                                <div class="symbol-icon">🚪</div>
-                                <h4>The Bedroom Door</h4>
-                                <p>Symbolizes the barrier between Gregor and humanity. When open, hope remains; when closed, complete isolation.</p>
-                            </div>
-                            
-                            <div class="symbol-item">
-                                <div class="symbol-icon">👔</div>
-                                <h4>The Father's Uniform</h4>
-                                <p>Represents the father's return to workforce vitality after Gregor's incapacitation, but also his rigidity and aggression.</p>
-                            </div>
-                            
-                            <div class="symbol-item">
-                                <div class="symbol-icon">🎻</div>
-                                <h4>The Violin</h4>
-                                <p>Art and beauty that Gregor can still appreciate even in his degraded state, representing the persistence of the human soul.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 7: Conclusion -->
-                <div class="slide-container" id="slide-6">
-                    <div class="slide-header">
-                        <div class="part-label">Part 7: Conclusion</div>
-                        <h1 class="slide-title">FINAL THOUGHTS</h1>
-                    </div>
-                    <div class="slide-content">
-                        <div class="text-content">
-                            <div class="content-block">
-                                <h3>The Kafkaesque Legacy</h3>
-                                <p>The term "Kafkaesque" has entered our vocabulary to describe surreal, disorienting situations where bureaucracy, absurdity, and powerlessness combine. *The Metamorphosis* remains the definitive example.</p>
-                            </div>
-                            
-                            <div class="highlight-box">
-                                <strong>Modern Relevance:</strong> In an age of economic anxiety and isolation, Gregor's story resonates more than ever. Who hasn't felt reduced to a "bug" by their job? Who doesn't fear being discarded when no longer "useful"?
-                            </div>
-                            
-                            <div class="content-block">
-                                <h3>Key Takeaways</h3>
-                                <ul class="bullet-list">
-                                    <li>Identity is fragile and often externally defined</li>
-                                    <li>Empathy has limits when tested by inconvenience</li>
-                                    <li>The absurdity of existence requires no explanation</li>
-                                    <li>Self-worth should not depend on productivity</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="quote-block" style="margin-top: 30px;">
-                                "The Metamorphosis is not about insects. It's about what happens when life pulls the rug out from under you. It's about feeling invisible in your own home."
-                            </div>
-                        </div>
-                        <div class="image-container">
-                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80" alt="Open book" style="filter: sepia(0.2) contrast(1.1);">
-                            <div class="image-overlay">Kafka's masterpiece continues to transform readers 110 years later</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 8: Bibliography -->
-                <div class="slide-container" id="slide-7">
-                    <div class="slide-header">
-                        <div class="part-label">Part 8: References</div>
-                        <h1 class="slide-title">BIBLIOGRAPHY</h1>
-                    </div>
-                    <div class="slide-content" style="grid-template-columns: 1fr;">
-                        <ul class="bibliography-list">
-                            <li>
-                                <strong>Kafka, Franz.</strong> <em>The Metamorphosis</em> (Die Verwandlung). Leipzig: Kurt Wolff Verlag, 1915.
-                            </li>
-                            <li>
-                                <strong>Corngold, Stanley.</strong> <em>The Commentator's Despair: The Interpretation of Kafka's Metamorphosis</em>. Port Washington: Kennikat Press, 1973.
-                            </li>
-                            <li>
-                                <strong>Sokel, Walter H.</strong> "From Marx to Myth: The Structure of Kafka's 'Metamorphosis'." <em>Modern Language Notes</em>, vol. 81, no. 5, 1966.
-                            </li>
-                            <li>
-                                <strong>Spilka, Mark.</strong> "Kafka's 'Metamorphosis' as Source and Model for Joyce's 'Portrait'." <em>James Joyce Quarterly</em>, vol. 22, no. 3, 1985.
-                            </li>
-                            <li>
-                                <strong>Gray, Richard T.</strong> <em>A Franz Kafka Encyclopedia</em>. Westport: Greenwood Press, 2005.
-                            </li>
-                            <li>
-                                <strong>Adorno, Theodor W.</strong> "Notes on Kafka." In <em>Prisms</em>. Cambridge: MIT Press, 1981.
-                            </li>
-                            <li>
-                                <strong>Benjamin, Walter.</strong> "Franz Kafka: On the Tenth Anniversary of His Death." In <em>Illuminations</em>. New York: Schocken Books, 1968.
-                            </li>
-                        </ul>
-                        
-                        <div style="margin-top: 30px; padding: 20px; background: var(--bg-card); border-radius: 8px; text-align: center;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">
-                                Presentation by [Your Name] • Literature Class • 2026
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Navigation Controls -->
-                <div class="slide-controls">
-                    <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">
-                        <span>←</span> Previous
-                    </button>
-                    
-                    <div class="slide-indicators" id="indicators">
-                        <!-- Generated by JS -->
-                    </div>
-                    
-                    <div class="screen-controls">
-                        <button class="control-btn" onclick="toggleFullscreen()">
-                            <span>⛶</span> Full Screen
-                        </button>
-                        <button class="control-btn">
-                            <span>🔊</span> Volume
-                        </button>
-                    </div>
-                    
-                    <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">
-                        Next <span>→</span>
-                    </button>
-                </div>
-            </main>
-        </div>
+<div class="bg">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+  <section class="Header">
+      <h1>Dhika's Coding Journey</h1>
+<hr>
+  </section>
+<div class="Intro">
+  <h2>Introduction</h2>
+  <p>
+    I'm learning coding slowly, not to rush, but to understand.  <br>
+    Every line I write is part of a process — sometimes messy, sometimes clear.  <br>
+    But I keep going, step by step, building something real in my own way.
+  </p>
+</div>
+<div class="About">
+  <h2>About me</h2>
+  <p>    My name is <em>Dhika Albani.</em> I'm currently a student, exploring coding, <br>
+    philosophy, and self-development step by step.</p>
+    <div class="bio">
+      <p><strong>Age:</strong> 14</p>
+      <p><strong>Focus:</strong> Coding, mindset, growth</p>
+      <p><strong>Style:</strong> Calm, Aware, Consistent</p>
+      <p><strong>Goal:</strong> Build myself before building big things.</p>
+      <p><strong>Favorites:</strong> Sky, Water, Air</p>
     </div>
-
-    <script>
-        let currentSlide = 0;
-        const totalSlides = 8;
-        
-        // Initialize indicators
-        function initIndicators() {
-            const container = document.getElementById('indicators');
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'indicator' + (i === 0 ? ' active' : '');
-                dot.onclick = () => goToSlide(i);
-                container.appendChild(dot);
-            }
-        }
-        
-        function updateUI() {
-            // Update slides
-            document.querySelectorAll('.slide-container').forEach((slide, index) => {
-                slide.classList.toggle('active', index === currentSlide);
-            });
-            
-            // Update sidebar
-            document.querySelectorAll('.nav-item').forEach((item, index) => {
-                item.classList.toggle('active', index === currentSlide);
-            });
-            
-            // Update indicators
-            document.querySelectorAll('.indicator').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-            
-            // Update buttons
-            document.getElementById('prevBtn').disabled = currentSlide === 0;
-            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
-        }
-        
-        function changeSlide(direction) {
-            const newSlide = currentSlide + direction;
-            if (newSlide >= 0 && newSlide < totalSlides) {
-                currentSlide = newSlide;
-                updateUI();
-            }
-        }
-        
-        function goToSlide(index) {
-            if (index >= 0 && index < totalSlides) {
-                currentSlide = index;
-                updateUI();
-            }
-        }
-        
-        function toggleFullscreen() {
-            document.body.classList.toggle('fullscreen');
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
-            if (e.key === 'Escape') document.body.classList.remove('fullscreen');
-        });
-        
-        // Initialize
-        initIndicators();
-        updateUI();
-    </script>
+</div>
+<div class="Journey">
+  <h2>Journey log</h2>
+  <div class="log">
+    <p class="date">April 20, 2026</p>
+    <p>Exploring the externality. <br> Learned about reality further more in the external, knowing everyone, every humans is the same but with each different flow just like me itself.</p>
+  </div>
+  <div class="log">
+    <p class="date">April 19, 2026</p>
+    <p>Started building this page. <br> Learning how to control layout, animation. And creating something calm and personal.</p>
+  </div>
+  <div class="log">
+    <p class="date">April 18, 2026</p>
+    <p>Learned about focus and awareness.<br> Not rushing, but moving step by step without lose of consistency.</p>
+  </div>
+  <p>View my Growth System(GS) for more: <a href="https://www.notion.so/ca867815d15846e0b5b6165a872fdee2" target="_blank" class="btn"> View my Growth System.</a>
+  </p>
+</div>
+<div class="nav-ball"></div>
+<div class="nav-menu">
+  <div class="menu-item" onclick="scrollToTop()" >↑</div>
+  <div class="menu-item" onclick="scrollToSection('.About')">A</div>
+  <div class="menu-item" onclick="scrollToSection('.Journey')">J</div>
+  <div class="menu-item" onclick="toggleMusic()">♪</div>
+</div>
+<audio id="bg-music" loop>
+  <source src="https://audio.jukehost.co.uk/Gs8RCV6TZ5olRy0S10GvwjD5QiR2RAj9" type="audio/mpeg">
+</audio>
 </body>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const bg = document.querySelector(".bg");
+    function createBubble() {
+      const bubble = document.createElement("span");
+      
+      const size = Math.random() * 20 + 10;
+      bubble.style.width = size + "px";
+      bubble.style.height = size + "px";
+      bubble.style.left = Math.random() * 100 + "%";
+      
+      bubble.style.animationDuration = (Math.random() * 10 + 10) + "s";
+      
+      const drift = (Math.random() * 100 - 50) + "px"; 
+      bubble.style.setProperty("--drift", drift);
+      
+      const depth = Math.random();
+      bubble.style.opacity = depth * 0.6;
+      bubble.style.filter = "blur(" + (depth * 4) + "px)";
+      bubble.style.zIndex = Math.floor(depth * -10);
+      
+      bg.appendChild(bubble);
+      
+      setTimeout(() => {
+        bubble.remove();
+      }, 20000);
+    }
+    setInterval(createBubble, 800);
+  });
+  const journey = document.querySelector(".Journey");
+  window.addEventListener("scroll", () => { 
+    const rect = journey.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      journey.style.opacity = "1";
+      journey.style.transform = "translateX(0)";
+    }
+  })
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+  const navBall = document.querySelector(".nav-ball");
+  window.addEventListener("scroll", () => { 
+    if (window.scrollY > 200) { navBall.classList.add("show");} else { navBall.classList.remove("show");}
+  })
+  const navMenu = document.querySelector(".nav-menu");
+navBall.addEventListener("click", () => {
+  if (navMenu.classList.contains("show")) {
+    navMenu.classList.add("closing");
+    setTimeout(() => {
+      navMenu.classList.remove("show", "closing");
+    }, 200);
+  } else {
+    navMenu.classList.add("show");
+  }
+});
+  function scrollToSection(selector) { document.querySelector(selector).scrollIntoView({
+    behavior: "smooth"
+  });
+  }
+  document.addEventListener("click", (e) => {
+    if (!navBall.contains(e.target) && ! navMenu.contains(e.target)) {
+      navMenu.classList.add("closing");
+      setTimeout(() => {
+      navMenu.classList.remove("show");
+      navMenu.classList.remove("closing");
+      }, 200);
+    }
+  })
+// ===== MUSIC CONTROL =====
+const music = document.getElementById("bg-music");
+const menuItems = document.querySelectorAll(".menu-item");
+const musicBtn = menuItems[3];
+
+function toggleMusic() {
+  let fadeInterval = null;
+  if (music.paused) {
+    music.volume = 0;
+    music.play().catch(() => {});
+
+    let vol = 0;
+    const fadeIn = setInterval(() => {
+      vol += 0.05;
+
+      if (vol >= 1) {
+        vol = 1;
+        clearInterval(fadeIn);
+      }
+
+      music.volume = vol;
+    }, 50);
+
+    musicBtn.classList.add("active");
+
+  } else {
+    let vol = music.volume;
+
+    const fadeOut = setInterval(() => {
+      vol -= 0.05;
+
+      if (vol <= 0) {
+        vol = 0;
+        clearInterval(fadeOut);
+        music.pause();
+      }
+
+      music.volume = vol;
+    }, 50);
+
+    musicBtn.classList.remove("active");
+  }
+}
+
+// ===== MENU CLICK EFFECT =====
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+
+    // reset semua kecuali music
+    menuItems.forEach((i, iIndex) => {
+      if (iIndex !== 3) i.classList.remove("active");
+    });
+
+    // kalau bukan music → highlight sebentar
+    if (index !== 3) {
+      item.classList.add("active");
+
+      setTimeout(() => {
+        item.classList.remove("active");
+      }, 600);
+    }
+  });
+});
+  </script>
 </html>
