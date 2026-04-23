@@ -1,1 +1,9 @@
-Hello. This is Dhika Albani, i make this code for the first time as a student in 14. Working as a first portofolio from me, i started learning HTML by now but later i may learn even wider programming languages such as Python or learning even more about technology. For now, is started from a easier one to take step and steps.
+Hello, I’m Dhika Albani.
+
+This is my first personal website, built as part of my learning journey in coding and self-development.
+
+I started with HTML, focusing not only on building something functional, but also something meaningful and calm.
+
+This project reflects how I learn — step by step, without rushing, but with awareness.
+
+In the future, I plan to expand into other programming languages such as Python and explore technology more deeply.
