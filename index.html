@@ -6,6 +6,9 @@
   <title>Dhika's Space</title>
 
   <style>
+  * {
+  -webkit-tap-highlight-color: transparent;
+}
     body {
       background-color: #0f0f0f;
       color: #eaeaea;
@@ -287,6 +290,188 @@ a:focus {
 .nav-menu.show .menu-item:nth-child(4) {
   transition-delay: 0.2s;
 }
+
+.Concepts {
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+.Concepts h2 {
+  border-left: 2px solid #456;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+.concept-item {
+  margin-bottom: 30px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.concept-number {
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+  opacity: 0.4;
+}
+.concept-item img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+.concept-item:hover {
+  border-left: 1px solid rgba(120, 180, 255, 0.3);
+  transition: 0.3s;
+}
+.linebreak {
+  display: block;
+  width: 345px;
+  height: 1px;
+  margin: 10px 0;
+  background: rgba(125, 185, 255, 1);
+}
+
+.subcon {
+  margin-top: 10px;
+}
+.subcon-item {
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 6px 8px;
+  transition: background 0.3s ease;
+}
+.subcon-item:active {
+  transform: scale(0.97);
+  transition: transform 0.1s;
+}
+.subcon-item:hover {
+  background: rgba(120, 180, 255, 0.08);
+}
+.subcon-item.active {
+  background: rgba(120, 180, 255, 0.06);
+}
+.subcon-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.subcon-item::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(ellipse at left, rgba(120,180,255,0.15) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 1s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.subcon-item:active::after {
+  animation: ripple-out 1s ease-out forwards;
+}
+
+@keyframes ripple-out {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1; /* Quick fade in */
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(12);
+    opacity: 0; /* Fades out as it hits max size */
+  }
+}
+
+.glow-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.concept-img {
+  display: block;
+  width: 300px; 
+  border-radius: 12px;
+  position: relative;
+  z-index: 2; 
+}
+
+/* Vertical Linear Glow */
+.glow-wrapper::after {
+  content: "";
+  position: absolute;
+  
+  /* Start exactly at the bottom edge */
+  top: 90%; 
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Same width as image so it doesn't "stretch" out wide */
+  width: 100%; 
+  /* Height of the downward fade */
+  height: 100px; 
+  
+  /* CHANGED: Fades from image color down to transparent */
+  background: linear-gradient(
+    to bottom, 
+    rgba(120, 180, 255, 0.16) 0%, 
+    transparent 100%
+  );
+  
+  /* Lower blur keeps it from bleeding horizontally */
+  filter: blur(4px); 
+  z-index: 1;
+  pointer-events: none; 
+}
+
+
+.subcon-title {
+  font-size: 0.85em;
+  opacity: 0.65;
+  transition: 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.subcon-item:hover .subcon-title {
+  opacity: 1;
+  color: #cfe9ff;
+}
+.subcon-title:hover {
+  opacity: 1;
+  color: #cfe9ff;
+}
+.subcon-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 0.8em;
+  line-height: 1.5;
+  transition: all 0.4s ease;
+}
+.subcon-item.active .subcon-content {
+  max-height: 300px;
+  opacity: 0.8;
+  margin-top: 6px;
+}
+.indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(120, 180, 255, 0.25);
+  transition: all 0.3s ease;
+}
+.subcon-item.active .indicator {
+  background: rgba(120, 180, 255, 0.9);
+  box-shadow: 0 0 8px rgba(120, 180, 255, 0.6);
+  transform: scale(1.4);
+}
 </style>
 </head>
 
@@ -337,11 +522,183 @@ a:focus {
   <p>View my Growth System(GS) for more: <a href="https://www.notion.so/ca867815d15846e0b5b6165a872fdee2" target="_blank" class="btn"> View my Growth System.</a>
   </p>
 </div>
+<div class="Concepts">
+  <h2>Concepts</h2>
+  <div class="concept-item">
+    <div class="concept-number">01</div>
+    <div class="glow-wrapper"><img src="https://i.postimg.cc/43ykh6Dq/file-00000000c0f07208adc289ffb87839df.png" alt="Concept Image" cpass="concept-img"></div>
+  <span class="linebreak"></span>
+    <p><strong>Presence as Reality</strong><br>Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.</p>
+    <div class="subcon">
+      <div class="subcon-item">
+        <div class="subcon-title"><span class="label">Presence as Clarity</span>
+  <span class="indicator"></span></div>
+        
+        <div class="subcon-content">Seeing things as they are without distortion.</div>
+      </div>
+      <div class="subcon-item">
+        <div class="subcon-title"><span class="label">Presence as Acceptance</span>
+  <span class="indicator"></span></div>
+        
+        <div class="subcon-content">Allowing reality without resistance.</div>
+      </div>
+      <div class="subcon-item">
+        <div class="subcon-title"><span class="label">Presence as Simplicity</span>
+  <span class="indicator"></span></div>
+      
+      <div class="subcon-content">Reducing unnecessary thinking, become simple with reality.</div>
+      </div>
+      <div class="subcon-item">
+        <div class="subcon-title"><span class="label">Presence as Stability</span>
+  <span class="indicator"></span></div>
+        
+        <div class="subcon-content">Staying steady regardless of situation.</div>
+      </div>
+      <div class="subcon-item">
+        <div class="subcon-title"><span class="label">Presence as Decision</span>
+  <span class="indicator"></span></div>
+        
+        <div class="subcon-content">Acting clearly without overthinking.</div>
+      </div>
+    </div>
+  </div>
+ <div class="concept-item">
+  <div class="concept-number">02</div>
+<div class="glow-wrapper"><img src="https://i.postimg.cc/pr2LBT57/file-00000000901871faad077a2004189fee.png" alt="Concept Image" class="concept-img"></div>
+  <span class="linebreak"></span>
+  <p><strong>Personal Sanctuary</strong></p>
+<p><em>The Imagination</em></p>
+<p>
+A place beyond reality that reflects your inner state.
+Not entered by force, but revealed through presence.
+</p>
+
+<div class="subcon">
+  <div class="subcon-item">
+  <div class="subcon-title"><span class="label"><strong>The Entrance</strong></span>
+  <span class="indicator"></span></div>
+  
+  <div class="subcon-content">A White Door appears only in still moments — when the world softens and your mind is quiet enough to notice it.
+
+It does not invite you.
+It simply exists.
+
+And whether you see it or not… depends on your awareness.
+  </div>
+  </div>
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>The Plain</strong></span>
+  <span class="indicator"></span></div>
+    
+    <div class="subcon-content">Beyond the door lies an endless field beneath a silent sky.
+
+At the center stands a single tree — The One.
+
+The world is not fixed.
+It responds to you.
+
+Peace shapes it into a sanctuary.
+Restlessness turns it into something… unfamiliar.
+    </div>
+  </div>
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>The One</strong></span>
+  <span class="indicator"></span></div>
+    
+    <div class="subcon-content">The One does not move, does not speak.
+
+Yet its presence decides everything.
+
+If it welcomes you, the field breathes with you.
+
+If it does not… the silence becomes heavy.
+    </div>
+  </div>
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>The Unknowns</strong></span>
+  <span class="indicator"></span></div>
+    
+    <div class="subcon-content">From the distant grass, they appear.
+
+Not approaching. Not attacking.
+
+Only watching.
+
+They are not creatures of that place—
+they are reflections of what you have not faced.
+    </div>
+  </div>
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>The Truth</strong></span>
+  <span class="indicator"></span></div>
+    
+    <div class="subcon-content">
+      This place was never separate from reality.
+
+It is where your thoughts take form—
+where your mind reveals itself without disguise.
+
+Not illusion.
+
+But a mirror.
+    </div>
+  </div>
+</div>
+</div>
+<div class="concept-item">
+  <div class="concept-number">03</div>
+  <div class="glow-wrapper"><img src="https://i.postimg.cc/cCQVNX3d/file-00000000179c7208a6eaec93fdf5e509.png" alt="Concept Image" class="concept-img"></div>
+  <span class="linebreak"></span>
+<p><strong>Friend with Reality</strong></p>
+
+<p>
+Reality is not against you. It is neutral.
+But your relationship with it defines your experience.
+</p>
+
+<div class="subcon">
+
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>Seeing Others Clearly</strong></span>
+  <span class="indicator"></span></div>
+    <div class="subcon-content">
+      People are not above or below you. They are just moving in their own flow.
+    </div>
+  </div>
+
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>Dropping Internal Pressure</strong></span>
+  <span class="indicator"></span></div>
+    <div class="subcon-content">
+      Most fear comes from your own interpretation, not reality itself.
+    </div>
+  </div>
+
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>Moving With Reality</strong></span>
+  <span class="indicator"></span></div>
+    <div class="subcon-content">
+      Instead of resisting situations, align with what is happening and respond clearly.
+    </div>
+  </div>
+
+  <div class="subcon-item">
+    <div class="subcon-title"><span class="label"><strong>Social Simplicity</strong></span>
+  <span class="indicator"></span></div>
+    <div class="subcon-content">
+      Interaction becomes lighter when you stop overthinking how you are seen.
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
 <div class="nav-ball"></div>
 <div class="nav-menu">
   <div class="menu-item" onclick="scrollToTop()" >↑</div>
   <div class="menu-item" onclick="scrollToSection('.About')">A</div>
   <div class="menu-item" onclick="scrollToSection('.Journey')">J</div>
+  <div class="menu-item" onclick="scrollToSection('.Concepts')">C</div>
   <div class="menu-item" onclick="toggleMusic()">♪</div>
 </div>
 <audio id="bg-music" loop>
@@ -385,6 +742,24 @@ a:focus {
       journey.style.transform = "translateX(0)";
     }
   })
+  const concepts = document.querySelector(".Concepts");
+  window.addEventListener("scroll", () => {
+    const rect = concepts.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100)
+    {
+      concepts.style.opacity = "1";
+      concepts.style.transform = "translateY(0)"
+    }
+  })
+  document.querySelectorAll(".subcon-item").forEach(item => {
+    item.addEventListener("click", () => {
+      document.querySelectorAll(".subcon-item").forEach( i => {
+        if (i !== item)
+        i.classList.remove("active")
+      });
+      item.classList.toggle("active");
+    });
+  });
   function scrollToTop() {
     window.scrollTo({
       top: 0,
@@ -422,7 +797,7 @@ navBall.addEventListener("click", () => {
 // ===== MUSIC CONTROL =====
 const music = document.getElementById("bg-music");
 const menuItems = document.querySelectorAll(".menu-item");
-const musicBtn = menuItems[3];
+const musicBtn = menuItems[4];
 
 function toggleMusic() {
   let fadeInterval = null;
@@ -469,11 +844,11 @@ menuItems.forEach((item, index) => {
 
     // reset semua kecuali music
     menuItems.forEach((i, iIndex) => {
-      if (iIndex !== 3) i.classList.remove("active");
+      if (iIndex !== 4) i.classList.remove("active");
     });
 
     // kalau bukan music → highlight sebentar
-    if (index !== 3) {
+    if (index !== 4) {
       item.classList.add("active");
 
       setTimeout(() => {
