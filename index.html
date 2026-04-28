@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;600&display=swap" rel="stylesheet">
   <title>Dhika's Space</title>
 
   <style>
@@ -12,10 +13,19 @@
     body {
       background-color: #0f0f0f;
       color: #eaeaea;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.2px;
+      line-height: 1.6;
       text-align: center;
       margin: 0;
+      transition: opacity 0.25s ease;
     }
+
+body.jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+}
 
     .Header {
       font-size: 1em;
@@ -26,6 +36,12 @@
       padding: 0;
       z-index: 1000;  
       backdrop-filter: blur(6px);
+    }
+
+    .h1, h2 {
+      font-weight: 600;
+      letter-spacing: 0.3px;
+}
     }
 
     .Intro p {
@@ -126,6 +142,18 @@ a:focus {
   font-size: 0.9em;
   backdrop-filter: blur(4px);
   transition: all 0.4s ease;
+}
+.btn:after {
+  content: '';
+  position: absolute;
+  align-content: center;
+  top: 0%;
+  left: 0%;
+  width: 95%;
+  height: 95%;
+  background: rgba(120, 180, 255, 0.3);
+  border-radius: 50%;
+  filter: blur(10px);
 }
 .btn:hover {
   background: rgba(120, 180, 255, 0.15);
@@ -472,6 +500,94 @@ a:focus {
   box-shadow: 0 0 8px rgba(120, 180, 255, 0.6);
   transform: scale(1.4);
 }
+
+.Insight {
+  max-width: 600px;
+  text-align: left;
+  margin: 40px auto;
+}
+.Insight h2 {
+  border-left: 2px solid #456;
+  padding-left: 10px;
+}
+#quote {
+  opacity: 0.8;
+  margin-top: 15px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.footer {
+  margin-top: 60px;
+  padding: 30px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  opacity: 0.6;
+}
+.settings {
+  margin-top: 20px;
+}
+.setting-item {
+  margin: 10px 0;
+}
+.setting-item button {
+  margin-left: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: rgba(110, 180, 255, 0.2);
+  border: none;
+  color: #cfe7ff;
+}
+
+.rain {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: rgba(180, 220, 255, 0.4);
+  animation: rainFall linear infinite;
+}
+
+@keyframes rainFall {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.snow {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: snowFall linear infinite;
+}
+
+@keyframes snowFall {
+  to {
+    transform: translateY(100vh) translateX(30px);
+    opacity: 0;
+  }
+}
+
+.fish {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  background: rgba(120,180,255,0.4);
+  border-radius: 10px;
+  animation: swim linear infinite;
+}
+
+@keyframes swim {
+  from {
+    transform: translateX(-10vw);
+  }
+  to {
+    transform: translateX(110vw);
+  }
+}
 </style>
 </head>
 
@@ -482,84 +598,84 @@ a:focus {
   <span></span>
 </div>
   <section class="Header">
-      <h1>Dhika's Coding Journey</h1>
+      <h1 data-id="title">Dhika's Coding Journey</h1>
 <hr>
   </section>
 <div class="Intro">
-  <h2>Introduction</h2>
-  <p>
+  <h2 data-id="_intro">Introduction</h2>
+  <p data-id="intro">
     I'm learning coding slowly, not to rush, but to understand.  <br>
     Every line I write is part of a process — sometimes messy, sometimes clear.  <br>
     But I keep going, step by step, building something real in my own way.
   </p>
 </div>
 <div class="About">
-  <h2>About me</h2>
-  <p>    My name is <em>Dhika Albani.</em> I’m building myself through coding, philosophy, and disciplined growth. <br>
+  <h2 data-id="about">About me</h2>
+  <p data-id="about_intro">    My name is <em>Dhika Albani.</em> I’m building myself through coding, philosophy, and disciplined growth. <br>
    step by step.</p>
     <div class="bio">
-      <p><strong>Age:</strong> 14</p>
-      <p><strong>Focus:</strong> Coding, mindset, growth</p>
-      <p><strong>Style:</strong> Calm, Aware, Consistent</p>
-      <p><strong>Goal:</strong> Build myself before building big things.</p>
-      <p><strong>Favorites:</strong> Sky, Water, Air</p>
+      <p><strong data-id="bio_age">Age:</strong> 14</p>
+      <p><strong data-id="bio_focus">Focus:</strong> Coding, mindset, growth</p>
+      <p><strong data-id="bio_style">Style:</strong> Calm, Aware, Consistent</p>
+      <p><strong data-id="bio_goal">Goal:</strong> Build myself before building big things.</p>
+      <p><strong data-id="bio_favorites">Favorites:</strong> Sky, Water, Air</p>
     </div>
 </div>
 <div class="Journey">
-  <h2>Journey log</h2>
+  <h2 data-id="journey">Journey log</h2>
   <div class="log">
     <p class="date">April 20, 2026</p>
-    <p>Exploring the externality. <br> Learned about reality further more in the external, knowing everyone, every humans is the same but with each different flow just like me itself.
+    <p data-id="A20">Exploring the externality. <br> Learned about reality further more in the external, knowing everyone, every humans is the same but with each different flow just like me itself.
     </p>
   </div>
   <div class="log">
     <p class="date">April 19, 2026</p>
-    <p>Started building this page. <br> Learning how to control layout, animation. And creating something calm and personal.</p>
+    <p data-id="A19">Started building this page. <br> Learning how to control layout, animation. And creating something calm and personal.</p>
   </div>
   <div class="log">
     <p class="date">April 18, 2026</p>
-    <p>Realized that consistency comes not from force, but from staying aware in small actions.<br> Not rushing, but moving step by step without loss of consistency.</p>
+    <p data-id="A18">Realized that consistency comes not from force, but from staying aware in small actions.<br> Not rushing, but moving step by step without loss of consistency.</p>
   </div>
-  <p>View my Growth System(GS) for more: <a href="https://www.notion.so/ca867815d15846e0b5b6165a872fdee2" target="_blank" class="btn"> View my Growth System.</a>
-  </p>
+  <p data-id="GS">View my Growth System(GS) for more:</p> <a href="https://www.notion.so/ca867815d15846e0b5b6165a872fdee2" target="_blank" class="btn"> View my Growth System.</a>
 </div>
 <div class="Concepts">
-  <h2>Concepts</h2>
+  <h2 data-id="concepts">Concepts</h2>
   <div class="concept-item">
     <div class="concept-number">01</div>
-    <div class="glow-wrapper"><img src="file_00000000c0f07208adc289ffb87839df.png" alt="Concept Image" cpass="concept-img"></div>
+    <div class="glow-wrapper"><img src="file_00000000c0f07208adc289ffb87839df.png" alt="Concept Image" class="concept-img"></div>
   <span class="linebreak"></span>
-    <p><strong>Presence as Reality</strong><br>Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.</p>
+    <p><strong>Presence as Reality</strong></p>
+    <p data-id="par_desc">Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.</p>
     <div class="subcon">
       <div class="subcon-item">
         <div class="subcon-title"><span class="label">Presence as Clarity</span>
   <span class="indicator"></span></div>
         
-        <div class="subcon-content">Seeing things as they are without distortion.</div>
+        <div class="subcon-content" data-id="pac_con">Seeing things as they are without distortion.</div>
       </div>
       <div class="subcon-item">
         <div class="subcon-title"><span class="label">Presence as Acceptance</span>
   <span class="indicator"></span></div>
         
-        <div class="subcon-content">Allowing reality without resistance.</div>
+        <div class="subcon-content" data-id="paa_con">Allowing reality without resistance.</div>
       </div>
       <div class="subcon-item">
         <div class="subcon-title"><span class="label">Presence as Simplicity</span>
   <span class="indicator"></span></div>
       
-      <div class="subcon-content">Reducing unnecessary thinking, become simple with reality.</div>
+      <div class="subcon-content" data-id="pas_con">Reducing unnecessary thinking, become simple with reality.</div>
       </div>
       <div class="subcon-item">
         <div class="subcon-title"><span class="label">Presence as Stability</span>
   <span class="indicator"></span></div>
         
-        <div class="subcon-content">Staying steady regardless of situation.</div>
+        <div class="subcon-content" data-id="pasc_con">Staying steady regardless of situation.</div>
       </div>
       <div class="subcon-item">
         <div class="subcon-title"><span class="label">Presence as Decision</span>
   <span class="indicator"></span></div>
         
-        <div class="subcon-content">Acting clearly without overthinking.</div>
+        <div class="subcon-content" data-id="pad_con">Acting clearly without overthinking.</div>
       </div>
     </div>
   </div>
@@ -569,7 +685,7 @@ a:focus {
   <span class="linebreak"></span>
   <p><strong>Personal Sanctuary</strong></p>
 <p><em>The Imagination</em></p>
-<p>
+<p data-id="ps_desc">
 A place beyond reality that reflects your inner state.
 Not entered by force, but revealed through presence.
 </p>
@@ -579,7 +695,7 @@ Not entered by force, but revealed through presence.
   <div class="subcon-title"><span class="label"><strong>The Entrance</strong></span>
   <span class="indicator"></span></div>
   
-  <div class="subcon-content">A White Door appears only in still moments — when the world softens and your mind is quiet enough to notice it.
+  <div class="subcon-content" data-id="te_con">A White Door appears only in still moments — when the world softens and your mind is quiet enough to notice it.
 
 It does not invite you.
 It simply exists.
@@ -591,7 +707,7 @@ And whether you see it or not… depends on your awareness.
     <div class="subcon-title"><span class="label"><strong>The Plain</strong></span>
   <span class="indicator"></span></div>
     
-    <div class="subcon-content">Beyond the door lies an endless field beneath a silent sky.
+    <div class="subcon-content" data-id="tp_con">Beyond the door lies an endless field beneath a silent sky.
 
 At the center stands a single tree — The One.
 
@@ -606,7 +722,7 @@ Restlessness turns it into something… unfamiliar.
     <div class="subcon-title"><span class="label"><strong>The One</strong></span>
   <span class="indicator"></span></div>
     
-    <div class="subcon-content">The One does not move, does not speak.
+    <div class="subcon-content" data-id="to_con">The One does not move, does not speak.
 
 Yet its presence decides everything.
 
@@ -619,7 +735,7 @@ If it does not… the silence becomes heavy.
     <div class="subcon-title"><span class="label"><strong>The Unknowns</strong></span>
   <span class="indicator"></span></div>
     
-    <div class="subcon-content">From the distant grass, they appear.
+    <div class="subcon-content" data-id="tu_con">From the distant grass, they appear.
 
 Not approaching. Not attacking.
 
@@ -633,7 +749,7 @@ they are reflections of what you have not faced.
     <div class="subcon-title"><span class="label"><strong>The Truth</strong></span>
   <span class="indicator"></span></div>
     
-    <div class="subcon-content">
+    <div class="subcon-content" data-id="tt_con">
       This place was never separate from reality.
 
 It is where your thoughts take form—
@@ -652,7 +768,7 @@ But a mirror.
   <span class="linebreak"></span>
 <p><strong>Friend with Reality</strong></p>
 
-<p>
+<p data-id="fwr_desc">
 Reality is not against you. It is neutral.
 But your relationship with it defines your experience.
 </p>
@@ -662,7 +778,7 @@ But your relationship with it defines your experience.
   <div class="subcon-item">
     <div class="subcon-title"><span class="label"><strong>Seeing Others Clearly</strong></span>
   <span class="indicator"></span></div>
-    <div class="subcon-content">
+    <div class="subcon-content" data-id="soc_con">
       People are not above or below you. They are just moving in their own flow.
     </div>
   </div>
@@ -670,7 +786,7 @@ But your relationship with it defines your experience.
   <div class="subcon-item">
     <div class="subcon-title"><span class="label"><strong>Dropping Internal Pressure</strong></span>
   <span class="indicator"></span></div>
-    <div class="subcon-content">
+    <div class="subcon-content" data-id="dip_con">
       Most fear comes from your own interpretation, not reality itself.
     </div>
   </div>
@@ -678,7 +794,7 @@ But your relationship with it defines your experience.
   <div class="subcon-item">
     <div class="subcon-title"><span class="label"><strong>Moving With Reality</strong></span>
   <span class="indicator"></span></div>
-    <div class="subcon-content">
+    <div class="subcon-content" data-id="mwr_con">
       Instead of resisting situations, align with what is happening and respond clearly.
     </div>
   </div>
@@ -686,7 +802,7 @@ But your relationship with it defines your experience.
   <div class="subcon-item">
     <div class="subcon-title"><span class="label"><strong>Social Simplicity</strong></span>
   <span class="indicator"></span></div>
-    <div class="subcon-content">
+    <div class="subcon-content" data-id="ss_con">
       Interaction becomes lighter when you stop overthinking how you are seen.
     </div>
   </div>
@@ -694,6 +810,13 @@ But your relationship with it defines your experience.
 </div>
 </div>
 </div>
+
+<div class="Insight">
+  <h2 data-id="insight">Insight</h2>
+  <p id="quote">Loading. . .</p>
+  <button class="btn" onclick="randomQuote()" data-id="newinsight">New Insight</button>
+</div>
+
 <div class="nav-ball"></div>
 <div class="nav-menu">
   <div class="menu-item" onclick="scrollToTop()" >↑</div>
@@ -705,36 +828,68 @@ But your relationship with it defines your experience.
 <audio id="bg-music" loop>
   <source src="pixelmusic.mp3" type="audio/mpeg">
 </audio>
+<div class="footer">
+  <div class="footer-content">
+    
+    <p data-id="copyright">© 2026 Dhika Albani</p>
+    <p data-id="built">Built with calm, awarenss, and consistency.</p>
+    
+    <div class="settings">
+      <h3 data-id="settings">Settings</h3>
+      
+      <div class="setting-item">
+        Language:
+        <button onclick="setLang('id')">ID</button>
+        <button onclick="setLang('jp')">JP</button>
+        <button onclick="setLang('en')">EN</button>
+      </div>
+      <div class="setting-item">
+        background:
+        <button onclick="setBG('bubble')">Bubble</button>
+        <button onclick="setBG('rain')">Rain</button>
+        <button onclick="setBG('snow')">Snow</button>
+        <button onclick="setBG('fish')">Fish</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
   <script>
   document.addEventListener("DOMContentLoaded", () => {
     const bg = document.querySelector(".bg");
-    function createBubble() {
-      const bubble = document.createElement("span");
-      
-      const size = Math.random() * 20 + 10;
-      bubble.style.width = size + "px";
-      bubble.style.height = size + "px";
-      bubble.style.left = Math.random() * 100 + "%";
-      
-      bubble.style.animationDuration = (Math.random() * 10 + 10) + "s";
-      
-      const drift = (Math.random() * 100 - 50) + "px"; 
-      bubble.style.setProperty("--drift", drift);
-      
-      const depth = Math.random();
-      bubble.style.opacity = depth * 0.6;
-      bubble.style.filter = "blur(" + (depth * 4) + "px)";
-      bubble.style.zIndex = Math.floor(depth * -10);
-      
-      bg.appendChild(bubble);
-      
-      setTimeout(() => {
-        bubble.remove();
-      }, 20000);
-    }
-    setInterval(createBubble, 800);
+let maxBubbles = 25;
+
+function createBubble() {
+  if (document.querySelectorAll(".bg span").length > maxBubbles) return;
+
+  const bubble = document.createElement("span");
+
+  const size = Math.random() * 20 + 10;
+  bubble.style.width = size + "px";
+  bubble.style.height = size + "px";
+  bubble.style.left = Math.random() * 100 + "%";
+  bubble.style.animationDuration = (Math.random() * 10 + 10) + "s";
+
+  const drift = (Math.random() * 100 - 50) + "px";
+  bubble.style.setProperty("--drift", drift);
+
+  document.querySelector(".bg").appendChild(bubble);
+
+  setTimeout(() => bubble.remove(), 15000);
+}
+
   });
+  document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    document.querySelectorAll(".bg span").forEach(el => {
+      el.style.animationPlayState = "paused";
+    });
+  } else {
+    document.querySelectorAll(".bg span").forEach(el => {
+      el.style.animationPlayState = "running";
+    });
+  }
+});
   const journey = document.querySelector(".Journey");
   window.addEventListener("scroll", () => { 
     const rect = journey.getBoundingClientRect();
@@ -858,5 +1013,346 @@ menuItems.forEach((item, index) => {
     }
   });
 });
+
+const quotes = [
+  "Reality is simple. The mind makes it complicated. — Dhika",
+  "Clarity comes when you stop forcing meaning. — Dhika",
+  "River flows, everyone moves. Know it that everyone has their own flows. — Dhika",
+  "Acceptance with reality doesn't means a hopeless. But to savor every detail in your moments. — Dhika",
+  "Awareness is enough. — Dhika",
+  "Let things happen, then respond. — Dhika",
+  "Try to look at the most simple thing, sky, water, clouds. And you will feel it. — Dhika",
+  "You are not behind. You are just moving. — Dhika",
+  "Reality doesn't care but i choose to care. — Dhika",
+  "The only true wisdom is in knowing you know nothing. — Socrates",
+  "You have power over your mind - not outside events. Realize this, and you will find strength. — Marcus Aurelius",
+  "There are no facts, only interpretations. — Friedrich Nietzsche",
+  "It is not that we have a short life, but that we make it short. — Seneca",
+  "If you're lonely when you're alone, you're in bad company. — Sartre",
+  "Mostly it is loss which teaches us about the worth of things. — Schopenhauer",
+  "Who looks outside, dreams; who looks inside, awakes. — Carl Jung",
+  "Thinking is difficult, that's why most people judge. — Carl Jung",
+  "Knowing your own darkness is the best method for dealing with the darknesses of other people. — Carl Jung",
+  "Imagination is more important than knowledge. — Albert Einstein"
+  ];
+  function randomQuote() {
+    const q = 
+    quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById("quote").innerText = q;
+  }
+  randomQuote();
+  
+let currentBG = "bubble";
+
+function setBG(type) {
+  localStorage.setItem("bg", type);
+  currentBG = type;
+
+  if (type === "bubble") startBubble();
+  if (type === "rain") startRain();
+  if (type === "snow") startSnow();
+  if (type === "fish") startFish();
+  
+  document.querySelectorAll(".setting-item button").forEach(btn => {
+  btn.style.opacity = "0.5";
+});
+
+document.querySelectorAll(".setting-item button").forEach(btn => {
+  if (btn.textContent.toLowerCase() === type) {
+    btn.style.opacity = "1";
+  }
+});
+}
+
+window.onload = () => {
+  const lang = detectLang()
+  setLang(lang);
+
+  const savedBG = localStorage.getItem("bg") || "bubble";
+  setBG(savedBG);
+};
+
+const langData = {
+  id: {
+    title: "Perjalanan Coding Dhika",
+    _intro: "Perkenalan",
+    intro: "Saya belajar coding secara perlahan, bukan untuk terburu-buru, tapi untuk memahami. Setiap baris yang saya tulis adalah bagian dari proses — kadang berantakan, kadang jelas. Tapi saya tetap berjalan, langkah demi langkah.",
+
+    about: "Tentang Saya",
+    about_intro: "Nama saya Dhika Albani. Saya membangun diri melalui coding, filosofi, dan pertumbuhan disiplin. Langkah demi langkah.",
+
+    bio_age: "Umur",
+    bio_focus: "Fokus",
+    bio_style: "Gaya",
+    bio_goal: "Tujuan",
+    bio_favorites: "Favorit",
+
+    journey: "Catatan Perjalanan",
+    A20: "Menjelajahi eksternalitas. Belajar lebih dalam tentang realita di luar, memahami bahwa setiap orang sama, namun memiliki alurnya masing-masing seperti diri saya sendiri.",
+    A19: "Mulai membangun halaman ini. Belajar mengatur layout, animasi, dan menciptakan sesuatu yang tenang dan personal.",
+    A18: "Menyadari bahwa konsistensi bukan berasal dari paksaan, tetapi dari kesadaran dalam tindakan kecil. Tidak terburu-buru, tapi tetap bergerak langkah demi langkah tanpa kehilangan konsistensi.",
+    GS: "Lihat Growth System (GS) saya untuk lebih lanjut:",
+
+    concepts: "Konsep",
+
+    par_desc: "Menjadi sepenuhnya sadar terhadap apa yang sedang terjadi, tanpa menambahkan pikiran yang tidak perlu. Realita bukan apa yang kamu bayangkan — tapi apa yang ada di depanmu.",
+    pac_con: "Melihat sesuatu apa adanya tanpa distorsi.",
+    paa_con: "Menerima realita tanpa perlawanan.",
+    pas_con: "Mengurangi pikiran yang tidak perlu, menjadi sederhana dengan realita.",
+    pasc_con: "Tetap stabil dalam situasi apapun.",
+    pad_con: "Bertindak dengan jelas tanpa overthinking.",
+
+    ps_desc: "Tempat di luar realita yang mencerminkan keadaan dalam dirimu. Bukan dimasuki dengan paksaan, tapi muncul melalui kehadiran.",
+    te_con: "Sebuah pintu putih muncul hanya di momen tenang — ketika dunia melunak dan pikiran cukup hening untuk menyadarinya. Ia tidak mengundang. Ia hanya ada.",
+    tp_con: "Di balik pintu terdapat padang luas tanpa batas di bawah langit sunyi. Dunia ini merespon dirimu.",
+    to_con: "The One tidak bergerak dan tidak berbicara, tapi kehadirannya menentukan segalanya.",
+    tu_con: "Mereka muncul dari kejauhan. Bukan menyerang, hanya mengamati. Mereka adalah refleksi dari hal yang belum kamu hadapi.",
+    tt_con: "Tempat ini bukan terpisah dari realita. Ini adalah cerminan dari pikiranmu sendiri.",
+
+    fwr_desc: "Realita tidak melawanmu. Ia netral. Tapi hubunganmu dengannya menentukan pengalamanmu.",
+    soc_con: "Orang lain tidak lebih tinggi atau rendah. Mereka hanya bergerak dalam alurnya masing-masing.",
+    dip_con: "Sebagian besar rasa takut berasal dari interpretasi diri, bukan realita itu sendiri.",
+    mwr_con: "Daripada melawan situasi, selaraskan diri dan respon dengan jelas.",
+    ss_con: "Interaksi menjadi lebih ringan ketika kamu berhenti overthinking tentang bagaimana kamu dilihat.",
+
+    insight: "Wawasan",
+    newinsight: "Wawasan Baru",
+
+    copyright: "© 2026 Dhika Albani",
+    built: "Dibangun dengan ketenangan, kesadaran, dan konsistensi.",
+    settings: "Pengaturan"
+  },
+
+  en: {
+    title: "Dhika's Coding Journey",
+    _intro: "Introduction",
+    intro: "I'm learning coding slowly, not to rush, but to understand. Every line I write is part of a process — sometimes messy, sometimes clear. But I keep going, step by step, building something real in my own way.",
+
+    about: "About Me",
+    about_intro: "My name is Dhika Albani. I’m building myself through coding, philosophy, and disciplined growth. Step by step.",
+
+    bio_age: "Age",
+    bio_focus: "Focus",
+    bio_style: "Style",
+    bio_goal: "Goal",
+    bio_favorites: "Favorites",
+
+    journey: "Journey Log",
+    A20: "Exploring the external. Learning more about reality outside, realizing that everyone is the same, but each moves in their own flow just like me.",
+    A19: "Started building this page. Learning layout, animation, and creating something calm and personal.",
+    A18: "Realized that consistency comes not from force, but from awareness in small actions. Not rushing, but moving step by step without losing consistency.",
+    GS: "View my Growth System (GS) for more:",
+
+    concepts: "Concepts",
+
+    par_desc: "Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.",
+    pac_con: "Seeing things as they are without distortion.",
+    paa_con: "Allowing reality without resistance.",
+    pas_con: "Reducing unnecessary thinking and becoming simple with reality.",
+    pasc_con: "Staying stable regardless of situation.",
+    pad_con: "Acting clearly without overthinking.",
+
+    ps_desc: "A place beyond reality that reflects your inner state. Not entered by force, but revealed through presence.",
+    te_con: "A white door appears only in still moments — when the world softens and your mind is quiet enough to notice it.",
+    tp_con: "Beyond the door lies an endless field beneath a silent sky. The world responds to you.",
+    to_con: "The One does not move or speak, yet its presence decides everything.",
+    tu_con: "They appear from afar. Not attacking, only watching. They are reflections of what you have not faced.",
+    tt_con: "This place was never separate from reality. It is a reflection of your own mind.",
+
+    fwr_desc: "Reality is not against you. It is neutral. But your relationship with it defines your experience.",
+    soc_con: "People are not above or below you. They are simply moving in their own flow.",
+    dip_con: "Most fear comes from your own interpretation, not reality itself.",
+    mwr_con: "Instead of resisting situations, align with them and respond clearly.",
+    ss_con: "Interaction becomes lighter when you stop overthinking how you are seen.",
+
+    insight: "Insight",
+    newinsight: "New Insight",
+
+    copyright: "© 2026 Dhika Albani",
+    built: "Built with calm, awareness, and consistency.",
+    settings: "Settings"
+  },
+  
+jp: {
+  title: "ディカのコーディングの旅",
+  _intro: "イントロダクション",
+  intro: "私は急ぐためではなく、理解するためにゆっくりコーディングを学んでいます。書く一行一行はプロセスの一部であり、時には混乱し、時には明確になります。それでも、一歩ずつ、自分のやり方で進み続けています。",
+
+  about: "私について",
+  about_intro: "私はディカ・アルバニです。コーディング、哲学、そして規律ある成長を通して自分を築いています。一歩ずつ。",
+
+  bio_age: "年齢",
+  bio_focus: "フォーカス",
+  bio_style: "スタイル",
+  bio_goal: "目標",
+  bio_favorites: "好きなもの",
+
+  journey: "記録",
+  A20: "外の世界を探求する。現実についてさらに理解し、人は皆同じでありながら、それぞれ異なる流れを持っていると気づいた。",
+  A19: "このページを作り始めた。レイアウトやアニメーションを学び、落ち着いた個人的なものを作っている。",
+  A18: "一貫性は強制からではなく、小さな行動への意識から生まれると気づいた。急がず、しかし一歩ずつ進み続ける。",
+
+  GS: "グロースシステム（GS）を見る:",
+
+  concepts: "コンセプト",
+
+  par_desc: "今起きていることに完全に気づくこと。不必要な思考を加えない。現実とは想像ではなく、目の前にあるもの。",
+
+  pac_con: "歪みなく物事を見ること。",
+  paa_con: "抵抗せず現実を受け入れること。",
+  pas_con: "不要な思考を減らし、シンプルになること。",
+  pasc_con: "どんな状況でも安定していること。",
+  pad_con: "考えすぎず、明確に行動すること。",
+
+  ps_desc: "現実の外にある、自分の内面を映す場所。無理に入るものではなく、存在の中で現れる。",
+
+  te_con: "静かな瞬間にだけ白い扉が現れる。世界が静まり、心がそれに気づけるほど落ち着いたとき。",
+  tp_con: "扉の先には静かな空の下、果てしない平原が広がる。その世界はあなたに反応する。",
+  to_con: "「The One」は動かず、語らない。しかしその存在がすべてを決める。",
+  tu_con: "遠くから現れる。近づかず、攻撃もしない。ただ見ている。それは向き合っていない自分の一部。",
+  tt_con: "この場所は現実と別ではない。それは自分の心の映し出し。",
+
+  fwr_desc: "現実はあなたに敵対しない。ただ中立である。しかしその関係が体験を決める。",
+
+  soc_con: "人は上下ではない。それぞれの流れの中で動いている。",
+  dip_con: "多くの恐れは現実ではなく、自分の解釈から生まれる。",
+  mwr_con: "抵抗するのではなく、現実に合わせて明確に行動する。",
+  ss_con: "どう見られるかを考えすぎなければ、関係は軽くなる。",
+
+  insight: "インサイト",
+  newinsight: "新しい気づき",
+
+  copyright: "© 2026 ディカ・アルバニ",
+  built: "落ち着き、意識、そして一貫性によって作られた。",
+  settings: "設定"
+}
+};
+
+function setLang(lang) {
+  document.body.style.opacity = 0
+  
+  setTimeout(() => {
+  
+  document.querySelectorAll("[data-id]").forEach(el => {
+    const key = el.getAttribute("data-id");
+
+    if (langData[lang] && langData[lang][key]) {
+      el.innerText = langData[lang][key];
+    }
+  });
+
+document.body.classList.remove("jp");
+
+if (lang === "jp") {
+  document.body.classList.add("jp");
+}
+
+document.querySelectorAll(".setting-item button").forEach(btn => {
+  btn.style.opacity = "0.5";
+});
+
+document.querySelectorAll(".setting-item button").forEach(btn => {
+  if (btn.textContent.toLowerCase() === lang) {
+    btn.style.opacity = "1";
+  }
+});
+
+  localStorage.setItem("lang", lang);
+  document.body.style.opacity = 1;
+  }, 120);
+}
+
+function detectLang() {
+  const saved =
+  localStorage.getItem("lang");
+  if (saved) return saved;
+  
+  const userLang = navigator.language || navigator.userLanguage;
+  
+  if (userLang.startsWith("id"))
+  return "id";
+  if (userLang.startsWith("ja"))
+  return "jp";
+  return "en";
+}
+
+function startBubble() {
+  bgInterval = setInterval(() => {
+    if (currentBG !== "bubble") return;
+
+    const bubble = document.createElement("span");
+
+    const size = Math.random() * 15 + 10;
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "%";
+
+    bubble.style.animationDuration = (Math.random() * 10 + 10) + "s";
+    bubble.style.setProperty("--drift", (Math.random()*80-40)+"px");
+
+    document.querySelector(".bg").appendChild(bubble);
+
+    setTimeout(() => bubble.remove(), 15000);
+
+  }, 1200);
+}
+
+function startRain() {
+  bgInterval = setInterval(() => {
+    if (currentBG !== "rain") return;
+
+    const drop = document.createElement("div");
+    drop.className = "rain";
+
+    drop.style.left = Math.random() * 100 + "%";
+    drop.style.animationDuration = (Math.random()*1+0.5)+"s";
+
+    document.querySelector(".bg").appendChild(drop);
+
+    setTimeout(() => drop.remove(), 1500);
+  }, 80);
+}
+
+function startSnow() {
+  bgInterval = setInterval(() => {
+    if (currentBG !== "snow") return;
+
+    const snow = document.createElement("div");
+    snow.className = "snow";
+
+    snow.style.left = Math.random() * 100 + "%";
+    snow.style.animationDuration = (Math.random()*5+5)+"s";
+
+    document.querySelector(".bg").appendChild(snow);
+
+    setTimeout(() => snow.remove(), 8000);
+  }, 200);
+}
+
+function startFish() {
+  bgInterval = setInterval(() => {
+    if (currentBG !== "fish") return;
+
+    const fish = document.createElement("div");
+    fish.className = "fish";
+
+    fish.style.top = Math.random()*80 + "%";
+    fish.style.animationDuration = (Math.random()*10+10)+"s";
+
+    document.querySelector(".bg").appendChild(fish);
+
+    setTimeout(() => fish.remove(), 20000);
+  }, 1200);
+}
+
+let bgInterval;
+
+function clearBG() {
+  const bg = document.querySelector(".bg");
+  bg.innerHTML = "";
+
+  if (bgInterval) clearInterval(bgInterval);
+}
+
   </script>
 </html>
