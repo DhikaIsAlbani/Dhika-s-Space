@@ -1,1358 +1,1972 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;600&display=swap" rel="stylesheet">
-  <title>Dhika's Space</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Dhika's Space</title>
 
-  <style>
-  * {
-  -webkit-tap-highlight-color: transparent;
-}
-    body {
-      background-color: #0f0f0f;
-      color: #eaeaea;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.2px;
-      line-height: 1.6;
-      text-align: center;
-      margin: 0;
-      transition: opacity 0.25s ease;
-    }
-
-body.jp {
-  font-family: 'Noto Sans JP', sans-serif;
-  letter-spacing: 0.5px;
-  line-height: 1.8;
-}
-
-    .Header {
-      font-size: 1em;
-      margin-bottom: 20px;
-      position: sticky;
-      top: 0;
-      background-color: #0f0f0f;
-      padding: 0;
-      z-index: 1000;  
-      backdrop-filter: blur(6px);
-    }
-
-    .h1, h2 {
-      font-weight: 600;
-      letter-spacing: 0.3px;
-}
-    }
-
-    .Intro p {
-      max-width: 500px;
-      margin: auto;
-      line-height: 1.6;
-      opacity: 0.8;
-    }
-    .Intro h2 {
-      text-align: left;
-      opacity: 1;
-      border-left: 2px solid #456;
-      padding-left: 10px;
-      max-width: 600px;
-      margin: 40px auto;
-    }
-    .About {
-      margin: 40px auto;
-      max-width: 600px;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 0.5s;
-    }
-    @keyframes fadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    }
-    .About h2 {
-      border-left: 2px solid #456;
-      padding-left: 10px;
-      margin-bottom: 10px;
-    }
-    .About p {
-      opacity: 0.8;
-      line-height: 1.6;
-    }
-    .bio {
-      margin-top: 15px;
-      padding-left: 10px;
-      border-left: 1px solid rgba(255, 250, 250, 0.1);
-    }
-    .bio p {
-      margin: 5px 0;
-    }
-    .Journey {
-      max-width: 600px;
-      margin: 40px auto;
-      text-align: left;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: all 0.8s ease;
-    }
-    .Journey h2 {
-      border-left: 2px solid #456;
-      padding-left: 10px;
-      margin-bottom: 15px;
-    }
-    .Journey p {
-      margin-top: 10px;
-    }
-    .log {
-      margin-bottom: 20px;
-      padding-left: 10px;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .date {
-      font-size: 0.85em;
-      opacity: 0.5;
-      margin-bottom: 5px;
-    }
-    .log p {
-      line-height: 1.6;
-      opacity: 0.8;
-    }
-    .log:hover {
-  border-left: 1px solid rgba(120,180,255,0.3);
-  transition: 0.3s;
-}
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-a:focus {
-  outline: none;
-}
-.btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 18px;
-  border-radius: 20px;
-  background: rgba(120, 180, 255, 0.8);
-  border: 1px solid rgba(120, 180, 255, 0.2);
-  color: #cfe9ff;
-  text-decoration: none;
-  font-size: 0.9em;
-  backdrop-filter: blur(4px);
-  transition: all 0.4s ease;
-}
-.btn:after {
-  content: '';
-  position: absolute;
-  align-content: center;
-  top: 0%;
-  left: 0%;
-  width: 95%;
-  height: 95%;
-  background: rgba(120, 180, 255, 0.3);
-  border-radius: 50%;
-  filter: blur(10px);
-}
-.btn:hover {
-  background: rgba(120, 180, 255, 0.15);
-  border: 1px solid rgba(120, 180, 255, 0.4);
-  transform: translateY(-2px);
-}
-.btn:active {
-  transform: scale(0.95);
-  opacity: 0.2;
-}
-    .bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-.bg span {
-  position: absolute;
-  display: block;
-  border-radius: 50%;
-  background: rgba(203, 239, 255, 0.08);
-  backdrop-filter: blur(2px);
-  animation: floatUp linear infinite;
-}
-
-/* Animasi lebih natural + fade */
-@keyframes floatUp {
-  0% {
-    transform: translateY(100vh) translateX(0);
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 0.6;
-  }
-
-  50% {
-    transform: translateY(50vh) translateX(var(--drift));
-  }
-
-  80% {
-    opacity: 0.3;
-  }
-
-  100% {
-    transform: translateY(-10vh) translateX(calc(var(--drift) * -1));
-    opacity: 0;
-  }
-}
-.nav-ball {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 45px;
-  height: 45px;
-  opacity: 0;
-  border-radius: 50%;
-  background: rgba(120, 180, 255, 0.25);
-  border: 0.5px solid rgba(120, 180, 255, 0.35);
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-  z-index: 999;
-  -webkit-tap-highlight-color: transparent;
-  animation: floatBall 4s ease-in-out infinite;
-  transform: translateY(80px) scale(0.8);
-  transition: transform 0.6s ease, opacity 0.6s ease;
-}
-.nav-ball.show {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-@keyframes floatBall {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -5px; }
-}
-.nav-ball::after {
-  content: '';
-  position: absolute;
-  top: 12%;
-  left: 18%;
-  width: 38%;
-  height: 22%;
-  background: rgba(255, 255, 255, 0.18);
-  border-radius: 50%;
-  filter: blur(3px);
-  transform: rotate(-30deg);
-}
-.nav-ball:hover {
-  background: rgba(120, 180, 255, 0.2);
-  transform: scale(1,1);
-  box-shadow: 0 0 15px rgba(120, 180, 255, 0.3)
-}
-.nav-ball:active {
-  transform: scale(0.9);
-}
-.nav-menu {
-  position: fixed;
-  bottom: 80px;
-  right: 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0;
-  pointer-events: none;
-}
-.menu-item {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 0.5px solid rgba(120, 180, 255, 0.2);
-  background: rgba(120, 180, 255, 0.12);
-  backdrop-filter: blur(6px);
-  display: flex;
-  opacity: 0;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85em;
-  color: #cfe9ff;
-  transform: scale(0.4) translateY(10px);
-  transition: transform 0.35s cubic-bezier(.2,1.4,.4,1), opacity 0.3 ease, background 0.3 ease;
-}
-.nav-menu.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-.nav-menu.show .menu-item {
-  transform: scale(1) translateY(0);
-  opacity: 1;
-}
-.menu-item.active {
-  background: rgba(120, 180, 255, 0.4);
-  box-shadow: 0 0 15px rgba(120, 180, 255, 0.5);
-  transform: scale(0.9);
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1); } 50% {transform: scale(1.05); }
-}
-.menu-item:hover {
-  background: rgba(120, 180, 255, 0.25);
-  transform: scale(1.15);
-  box-shadow: 0 0 12px rgba(120, 180, 255, 0.3);
-}
-.nav-menu.closing .menu-item {
-  transform: scale(0.4) translateY(10px);
-  opacity: 0;
-  transition: all 0.2s ease;
-}
-.nav-menu.show .menu-item:nth-child(1) {
-  transition-delay: 0.05s;
-}
-.nav-menu.show .menu-item:nth-child(2) {
-  transition-delay: 0.1s;
-}
-.nav-menu.show .menu-item:nth-child(3) {
-  transition-delay: 0.15s;
-}
-.nav-menu.show .menu-item:nth-child(4) {
-  transition-delay: 0.2s;
-}
-
-.Concepts {
-  max-width: 600px;
-  margin: 40px auto;
-  text-align: left;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s ease;
-}
-.Concepts h2 {
-  border-left: 2px solid #456;
-  padding-left: 10px;
-  margin-bottom: 20px;
-}
-.concept-item {
-  margin-bottom: 30px;
-  padding-left: 10px;
-  border-left: 1px solid rgba(255,255,255,0.1);
-}
-.concept-number {
-  font-size: 0.8rem;
-  margin-bottom: 8px;
-  opacity: 0.4;
-}
-.concept-item img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  opacity: 0.8;
-}
-.concept-item:hover {
-  border-left: 1px solid rgba(120, 180, 255, 0.3);
-  transition: 0.3s;
-}
-.linebreak {
-  display: block;
-  width: 345px;
-  height: 1px;
-  margin: 10px 0;
-  background: rgba(125, 185, 255, 1);
-}
-
-.subcon {
-  margin-top: 10px;
-}
-.subcon-item {
-  margin-bottom: 8px;
-  cursor: pointer;
-  border-radius: 8px;
-  padding: 6px 8px;
-  transition: background 0.3s ease;
-}
-.subcon-item:active {
-  transform: scale(0.97);
-  transition: transform 0.1s;
-}
-.subcon-item:hover {
-  background: rgba(120, 180, 255, 0.08);
-}
-.subcon-item.active {
-  background: rgba(120, 180, 255, 0.06);
-}
-.subcon-item {
-  position: relative;
-  overflow: hidden;
-}
-
-.subcon-item::after {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(ellipse at left, rgba(120,180,255,0.15) 0%, transparent 70%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
-  transition: transform 1s ease, opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.subcon-item:active::after {
-  animation: ripple-out 1s ease-out forwards;
-}
-
-@keyframes ripple-out {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1; /* Quick fade in */
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(12);
-    opacity: 0; /* Fades out as it hits max size */
-  }
-}
-
-.glow-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.concept-img {
-  display: block;
-  width: 300px; 
-  border-radius: 12px;
-  position: relative;
-  z-index: 2; 
-}
-
-/* Vertical Linear Glow */
-.glow-wrapper::after {
-  content: "";
-  position: absolute;
-  
-  /* Start exactly at the bottom edge */
-  top: 90%; 
-  left: 50%;
-  transform: translateX(-50%);
-  
-  /* Same width as image so it doesn't "stretch" out wide */
-  width: 100%; 
-  /* Height of the downward fade */
-  height: 100px; 
-  
-  /* CHANGED: Fades from image color down to transparent */
-  background: linear-gradient(
-    to bottom, 
-    rgba(120, 180, 255, 0.16) 0%, 
-    transparent 100%
-  );
-  
-  /* Lower blur keeps it from bleeding horizontally */
-  filter: blur(4px); 
-  z-index: 1;
-  pointer-events: none; 
-}
-
-
-.subcon-title {
-  font-size: 0.85em;
-  opacity: 0.65;
-  transition: 0.3s;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.subcon-item:hover .subcon-title {
-  opacity: 1;
-  color: #cfe9ff;
-}
-.subcon-title:hover {
-  opacity: 1;
-  color: #cfe9ff;
-}
-.subcon-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  font-size: 0.8em;
-  line-height: 1.5;
-  transition: all 0.4s ease;
-}
-.subcon-item.active .subcon-content {
-  max-height: 300px;
-  opacity: 0.8;
-  margin-top: 6px;
-}
-.indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(120, 180, 255, 0.25);
-  transition: all 0.3s ease;
-}
-.subcon-item.active .indicator {
-  background: rgba(120, 180, 255, 0.9);
-  box-shadow: 0 0 8px rgba(120, 180, 255, 0.6);
-  transform: scale(1.4);
-}
-
-.Insight {
-  max-width: 600px;
-  text-align: left;
-  margin: 40px auto;
-}
-.Insight h2 {
-  border-left: 2px solid #456;
-  padding-left: 10px;
-}
-#quote {
-  opacity: 0.8;
-  margin-top: 15px;
-  line-height: 1.6;
-  font-style: italic;
-}
-
-.footer {
-  margin-top: 60px;
-  padding: 30px 20px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  opacity: 0.6;
-}
-.settings {
-  margin-top: 20px;
-}
-.setting-item {
-  margin: 10px 0;
-}
-.setting-item button {
-  margin-left: 5px;
-  margin-top: 10px;
-  padding: 5px 10px;
-  border-radius: 10px;
-  background: rgba(110, 180, 255, 0.2);
-  border: none;
-  color: #cfe7ff;
-}
-
-.rain {
-  position: absolute;
-  width: 2px;
-  height: 15px;
-  background: rgba(180, 220, 255, 0.4);
-  animation: rainFall linear infinite;
-}
-
-@keyframes rainFall {
-  to {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
-
-.snow {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: snowFall linear infinite;
-}
-
-@keyframes snowFall {
-  to {
-    transform: translateY(100vh) translateX(30px);
-    opacity: 0;
-  }
-}
-
-.fish {
-  position: absolute;
-  width: 20px;
-  height: 10px;
-  background: rgba(120,180,255,0.4);
-  border-radius: 10px;
-  animation: swim linear infinite;
-}
-
-@keyframes swim {
-  from {
-    transform: translateX(-10vw);
-  }
-  to {
-    transform: translateX(110vw);
-  }
-}
-</style>
+    <style>
+        * {
+        -webkit-tap-highlight-color: transparent;
+        }
+          body {
+            background-color: #0f0f0f;
+            color: #eaeaea;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
+            line-height: 1.6;
+            text-align: center;
+            margin: 0;
+            transition: opacity 0.25s ease;
+            position: relative;
+            z-index: 1;
+          }
+        
+        body.jp {
+        font-family: 'Noto Sans JP', sans-serif;
+        letter-spacing: 0.5px;
+        line-height: 1.8;
+        }
+        
+        body::before,
+        body::after {
+        z-index: 0;
+        }
+          .Header {
+            font-size: 1em;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background-color: #0f0f0f;
+            padding: 0;
+            z-index: 1000;  
+            backdrop-filter: blur(6px);
+          }
+        
+          .h1, h2 {
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        
+          .Intro p {
+            max-width: 500px;
+            margin: auto;
+            line-height: 1.6;
+            opacity: 0.8;
+          }
+          .Intro h2 {
+            text-align: left;
+            opacity: 1;
+            border-left: 2px solid #456;
+            padding-left: 10px;
+            max-width: 600px;
+            margin: 40px auto;
+          }
+          .About {
+            margin: 40px auto;
+            max-width: 600px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.5s;
+          }
+          @keyframes fadeIn {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          }
+          .About h2 {
+            border-left: 2px solid #456;
+            padding-left: 10px;
+            margin-bottom: 10px;
+          }
+          .About p {
+            opacity: 0.8;
+            line-height: 1.6;
+          }
+          .bio {
+            margin-top: 15px;
+            padding-left: 10px;
+            border-left: 1px solid rgba(255, 250, 250, 0.1);
+          }
+          .bio p {
+            margin: 5px 0;
+          }
+          .Journey {
+            max-width: 600px;
+            margin: 40px auto;
+            text-align: left;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.8s ease;
+          }
+          .Journey h2 {
+            border-left: 2px solid #456;
+            padding-left: 10px;
+            margin-bottom: 15px;
+          }
+          .Journey p {
+            margin-top: 10px;
+          }
+          .log {
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          .date {
+            font-size: 0.85em;
+            opacity: 0.5;
+            margin-bottom: 5px;
+          }
+          .log p {
+            line-height: 1.6;
+            opacity: 0.8;
+          }
+          .log:hover {
+        border-left: 1px solid rgba(120,180,255,0.3);
+        transition: 0.3s;
+        }
+        a {
+        -webkit-tap-highlight-color: transparent;
+        }
+        a:focus {
+        outline: none;
+        }
+        .btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 18px;
+        border-radius: 20px;
+        background: rgba(120, 180, 255, 0.8);
+        border: 1px solid rgba(120, 180, 255, 0.2);
+        color: #cfe9ff;
+        text-decoration: none;
+        font-size: 0.9em;
+        backdrop-filter: blur(4px);
+        transition: all 0.4s ease;
+        }
+        .btn:after {
+        content: '';
+        position: absolute;
+        align-content: center;
+        top: 0%;
+        left: 0%;
+        width: 95%;
+        height: 95%;
+        background: rgba(120, 180, 255, 0.3);
+        border-radius: 50%;
+        filter: blur(10px);
+        }
+        .btn:hover {
+        background: rgba(120, 180, 255, 0.15);
+        border: 1px solid rgba(120, 180, 255, 0.4);
+        transform: translateY(-2px);
+        }
+        .btn:active {
+        transform: scale(0.95);
+        opacity: 0.2;
+        }
+        
+        .bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+        }
+        .bg span {  
+        position: absolute;  
+        display: block;  
+        border-radius: 50%;  
+        background: rgba(203, 239, 255, 0.08);  
+        backdrop-filter: blur(2px);  
+        animation: floatUp linear infinite;  
+        }  
+        .layer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        }
+        
+        .back {
+        z-index: 1;
+        }
+        .mid {
+        z-index: 2;
+        }
+        .front {
+        z-index: 3;
+        }
+        
+        @keyframes floatUp {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+        
+        20% {
+          opacity: 0.6;
+        }
+        
+        50% {
+          transform: translateY(50vh) translateX(var(--drift));
+        }
+        
+        80% {
+          opacity: 0.3;
+        }
+        
+        100% {
+          transform: translateY(-10vh) translateX(calc(var(--drift) * -1));
+          opacity: 0;
+        }
+        }
+        .nav-ball {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        opacity: 0;
+        border-radius: 50%;
+        background: rgba(120, 180, 255, 0.25);
+        border: 0.5px solid rgba(120, 180, 255, 0.35);
+        backdrop-filter: blur(6px);
+        cursor: pointer;
+        z-index: 999;
+        -webkit-tap-highlight-color: transparent;
+        animation: floatBall 4s ease-in-out infinite;
+        transform: translateY(80px) scale(0.8);
+        transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+        .nav-ball.show {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        }
+        @keyframes floatBall {
+        0%, 100% { translate: 0 0; }
+        50% { translate: 0 -5px; }
+        }
+        .nav-ball::after {
+        content: '';
+        position: absolute;
+        top: 12%;
+        left: 18%;
+        width: 38%;
+        height: 22%;
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 50%;
+        filter: blur(3px);
+        transform: rotate(-30deg);
+        }
+        .nav-ball:hover {
+        background: rgba(120, 180, 255, 0.2);
+        transform: scale(1,1);
+        box-shadow: 0 0 15px rgba(120, 180, 255, 0.3)
+        }
+        .nav-ball:active {
+        transform: scale(0.9);
+        }
+        .nav-menu {
+        position: fixed;
+        bottom: 80px;
+        right: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 0;
+        pointer-events: none;
+        }
+        .menu-item {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 0.5px solid rgba(120, 180, 255, 0.2);
+        background: rgba(120, 180, 255, 0.12);
+        backdrop-filter: blur(6px);
+        display: flex;
+        opacity: 0;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85em;
+        color: #cfe9ff;
+        transform: scale(0.4) translateY(10px);
+        transition: transform 0.35s cubic-bezier(.2,1.4,.4,1), opacity 0.3s ease, background 0.3s ease;
+        }
+        .nav-menu.show {
+        opacity: 1;
+        pointer-events: auto;
+        }
+        .nav-menu.show .menu-item {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        }
+        .menu-item.active {
+        background: rgba(120, 180, 255, 0.4);
+        box-shadow: 0 0 15px rgba(120, 180, 255, 0.5);
+        transform: scale(0.9);
+        animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+        0%, 100% { transform: scale(1); } 50% {transform: scale(1.05); }
+        }
+        .menu-item:hover {
+        background: rgba(120, 180, 255, 0.25);
+        transform: scale(1.15);
+        box-shadow: 0 0 12px rgba(120, 180, 255, 0.3);
+        }
+        .nav-menu.closing .menu-item {
+        transform: scale(0.4) translateY(10px);
+        opacity: 0;
+        transition: all 0.2s ease;
+        }
+        .nav-menu.show .menu-item:nth-child(1) {
+        transition-delay: 0.05s;
+        }
+        .nav-menu.show .menu-item:nth-child(2) {
+        transition-delay: 0.1s;
+        }
+        .nav-menu.show .menu-item:nth-child(3) {
+        transition-delay: 0.15s;
+        }
+        .nav-menu.show .menu-item:nth-child(4) {
+        transition-delay: 0.2s;
+        }
+        
+        .Concepts {
+        max-width: 600px;
+        margin: 40px auto;
+        text-align: left;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+        }
+        .Concepts h2 {
+        border-left: 2px solid #456;
+        padding-left: 10px;
+        margin-bottom: 20px;
+        }
+        .concept-item {
+        margin-bottom: 30px;
+        padding-left: 10px;
+        border-left: 1px solid rgba(255,255,255,0.1);
+        }
+        .concept-number {
+        font-size: 0.8rem;
+        margin-bottom: 8px;
+        opacity: 0.4;
+        }
+        .concept-item img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        opacity: 0.8;
+        }
+        .concept-item:hover {
+        border-left: 1px solid rgba(120, 180, 255, 0.3);
+        transition: 0.3s;
+        }
+        .linebreak {
+        display: block;
+        width: 345px;
+        height: 1px;
+        margin: 10px 0;
+        background: rgba(125, 185, 255, 1);
+        }
+        
+        .subcon {
+        margin-top: 10px;
+        }
+        .subcon-item {
+        margin-bottom: 8px;
+        cursor: pointer;
+        border-radius: 8px;
+        padding: 6px 8px;
+        transition: background 0.3s ease;
+        }
+        .subcon-item:active {
+        transform: scale(0.97);
+        transition: transform 0.1s;
+        }
+        .subcon-item:hover {
+        background: rgba(120, 180, 255, 0.08);
+        }
+        .subcon-item.active {
+        background: rgba(120, 180, 255, 0.06);
+        }
+        .subcon-item {
+        position: relative;
+        overflow: hidden;
+        }
+        
+        .subcon-item::after {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(ellipse at left, rgba(120,180,255,0.15) 0%, transparent 70%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+        transition: transform 1s ease, opacity 0.4s ease;
+        pointer-events: none;
+        }
+        
+        .subcon-item:active::after {
+        animation: ripple-out 1s ease-out forwards;
+        }
+        
+        @keyframes ripple-out {
+        0% {
+          transform: translate(-50%, -50%) scale(0);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1; /* Quick fade in */
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(12);
+          opacity: 0; /* Fades out as it hits max size */
+        }
+        }
+        
+        .glow-wrapper {
+        position: relative;
+        display: inline-block;
+        }
+        
+        .concept-img {
+        display: block;
+        width: 300px; 
+        border-radius: 12px;
+        position: relative;
+        z-index: 2; 
+        }
+        
+        /* Vertical Linear Glow */
+        .glow-wrapper::after {
+        content: "";
+        position: absolute;
+        
+        /* Start exactly at the bottom edge */
+        top: 90%; 
+        left: 50%;
+        transform: translateX(-50%);
+        
+        /* Same width as image so it doesn't "stretch" out wide */
+        width: 100%; 
+        /* Height of the downward fade */
+        height: 100px; 
+        
+        /* CHANGED: Fades from image color down to transparent */
+        background: linear-gradient(
+          to bottom, 
+          rgba(120, 180, 255, 0.16) 0%, 
+          transparent 100%
+        );
+        
+        /* Lower blur keeps it from bleeding horizontally */
+        filter: blur(4px); 
+        z-index: 1;
+        pointer-events: none; 
+        }
+        
+        
+        .subcon-title {
+        font-size: 0.85em;
+        opacity: 0.65;
+        transition: 0.3s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+        .subcon-item:hover .subcon-title {
+        opacity: 1;
+        color: #cfe9ff;
+        }
+        .subcon-title:hover {
+        opacity: 1;
+        color: #cfe9ff;
+        }
+        .subcon-content {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        font-size: 0.8em;
+        line-height: 1.5;
+        transition: all 0.4s ease;
+        }
+        .subcon-item.active .subcon-content {
+        max-height: 300px;
+        opacity: 0.8;
+        margin-top: 6px;
+        }
+        .indicator {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(120, 180, 255, 0.25);
+        transition: all 0.3s ease;
+        }
+        .subcon-item.active .indicator {
+        background: rgba(120, 180, 255, 0.9);
+        box-shadow: 0 0 8px rgba(120, 180, 255, 0.6);
+        transform: scale(1.4);
+        }
+        
+        .Insight {
+        max-width: 600px;
+        text-align: left;
+        margin: 40px auto;
+        }
+        .Insight h2 {
+        border-left: 2px solid #456;
+        padding-left: 10px;
+        }
+        #quote {
+        opacity: 0.8;
+        margin-top: 15px;
+        line-height: 1.6;
+        font-style: italic;
+        transition: opacity 0.3s ease;
+        }
+        
+        .footer {
+        margin-top: 60px;
+        padding: 30px 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        opacity: 0.6;
+        }
+        .settings {
+        margin-top: 20px;
+        }
+        .setting-item {
+        margin: 10px 0;
+        }
+        .setting-item button {
+        margin-left: 5px;
+        margin-top: 10px;
+        padding: 5px 10px;
+        border-radius: 10px;
+        background: rgba(110, 180, 255, 0.2);
+        border: none;
+        color: #cfe7ff;
+        }
+        
+        @keyframes particle-fly {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        100% {
+          /* Moves the particle to the random coordinates set in JS */
+          transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0);
+          opacity: 0;
+        }
+        }
+        
+        /* Ensure your bubble pop doesn't conflict */
+        .pop {
+        animation: popAnim 0.4s forwards;
+        pointer-events: none;
+        }
+        
+        @keyframes popAnim {
+        to {
+          transform: scale(1.6);
+          opacity: 0;
+        }
+        }
+        /* The particle style */
+        .particle {
+        position: fixed;
+        pointer-events: none;
+        background: rgba(180, 220, 255, 0.9);
+        border-radius: 50%;
+        border: 1px solid rgba(120, 180, 255, 0.5);
+        z-index: 10000;
+        width: 5px;
+        height: 5px;
+        }
+        
+        @keyframes explode {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          /* Moves the particle based on variables set in JS */
+          transform: translate(var(--x), var(--y)) scale(0);
+          opacity: 0;
+        }
+        }
+        
+        .rain {
+        position: absolute;
+        width: 2px;
+        height: 15px;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+        animation: rainFall linear infinite;
+        }
+        
+        @keyframes rainFall {
+        0% {
+          transform: translateY(-10vh);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+        }
+        
+        .snow {  
+        position: absolute;  
+        width: 6px;  
+        height: 6px;  
+        background: white;  
+        border-radius: 50%;  
+        opacity: 0.7;  
+        animation: snowFall linear infinite;  
+        }  
+        
+        @keyframes snowFall {
+        0% {
+          transform: translateY(-10vh) rotate(10deg);
+          opacity: 0;
+        }
+        50% {
+          transform: translateY(50vh) rotate(180deg) translateX(20px);
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg) translateX(-20px);
+        }
+        }
+        
+        .snow-stain {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: white;
+        opacity: 0.6;
+        pointer-events: none;
+        animation: snowImpact 0.6s ease-out forwards;
+        }
+        
+        @keyframes snowImpact {
+        0% {
+          transform: scale(0.5);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+        }
+        
+        .fish {  
+        position: absolute;  
+        width: 20px;  
+        height: 10px;  
+        background: rgba(120,180,255,0.4);  
+        border-radius: 10px;  
+        animation: swim linear infinite;  
+        transition: filter 0.2s ease;
+        }  
+        
+        @keyframes swim {
+        from { left: -10%; }
+        to { left: 110%; }
+        }
+        
+        @keyframes fishDash {
+        0%   { transform: scaleX(1.0) translateY(0); }
+        30%  { transform: scaleX(1.5) translateY(-4px); }
+        60%  { transform: scaleX(0.85) translateY(2px); }
+        100% { transform: scaleX(1.0) translateY(0); }
+        }
+        
+        .fish-dash {
+        animation-duration: 3s !important;
+        filter: brightness(1.4);
+        }
+        
+        
+        /* LIGHT RAYS */
+        /* =============================================
+         UNDERWATER AMBIENT GLOW
+         Deep base tint from above the water surface
+         ============================================= */
+        body.mode-light::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        
+        background:
+          /* Surface bloom — bright focal point top-center */
+          radial-gradient(
+            ellipse 60% 30% at 50% -5%,
+            rgba(160, 230, 255, 0.22) 0%,
+            transparent 70%
+          ),
+          /* Mid-water tint */
+          linear-gradient(
+            to bottom,
+            rgba(100, 190, 255, 0.12) 0%,
+            rgba(60,  150, 220, 0.07) 40%,
+            rgba(20,  90,  160, 0.04) 70%,
+            transparent 100%
+          );
+        }
+        
+        /* =============================================
+         LIGHT RAYS  (layered pseudo-element trick:
+         wrap body content in a positioned container
+         so we can stack multiple ::before/::after;
+         here we use a dedicated .rays wrapper instead)
+         ============================================= */
+        
+        /* --- Ray layer 1: broad, slow, low-opacity --- */
+        body.mode-light::after {
+        content: "";
+        position: fixed;
+        inset: -10% -20%;           /* oversized so edges never clip */
+        z-index: 0;
+        pointer-events: none;
+        transform-origin: 50% 0%;   /* pivot at the "surface" */
+        
+        background:
+          /* Each stop pair = one ray: transparent gap → soft bright band → gap */
+          repeating-linear-gradient(
+            175deg,                  /* nearly vertical, slight left-lean */
+            transparent          0px,
+            transparent         60px,
+            rgba(200,240,255,0.055) 61px,
+            rgba(200,240,255,0.09)  68px,
+            rgba(200,240,255,0.055) 75px,
+            transparent         76px,
+            transparent        140px,
+            rgba(200,240,255,0.04)  141px,
+            rgba(200,240,255,0.065) 148px,
+            rgba(200,240,255,0.04)  155px,
+            transparent        156px,
+            transparent        260px,
+            rgba(200,240,255,0.03)  261px,
+            rgba(200,240,255,0.05)  270px,
+            transparent        271px,
+            transparent        380px
+          );
+        
+        /* Soft mask: rays are bright at top, fade to nothing by ~65% depth */
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          black 0%,
+          black 20%,
+          transparent 68%
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          black 0%,
+          black 20%,
+          transparent 68%
+        );
+        
+        animation: raysShift1 18s ease-in-out infinite alternate;
+        }
+        
+        @keyframes raysShift1 {
+        0%   { transform: rotate(-1.5deg) translateX(-18px); opacity: 0.75; }
+        35%  { opacity: 1;   }
+        65%  { opacity: 0.8; }
+        100% { transform: rotate( 1.8deg) translateX( 22px); opacity: 0.7; }
+        }
+        
+        /* =============================================
+         RAY LAYER 2 — narrower, faster, offset phase
+         Requires an extra element; use a utility div
+         OR a sibling pseudo on a wrapper element.
+        
+         If you have a <div class="scene"> wrapping
+         your page content, swap "body.mode-light"
+         below for ".scene":
+         ============================================= */
+        /*body.mode-light .ray-layer {
+        content: "";
+        position: fixed;
+        inset: -10% -20%;
+        z-index: 0;
+        pointer-events: none;
+        transform-origin: 50% 0%;
+        
+        background: repeating-linear-gradient(
+          168deg,
+          transparent            0px,
+          transparent           90px,
+          rgba(180,235,255,0.04)  91px,
+          rgba(180,235,255,0.07)  97px,
+          rgba(180,235,255,0.04) 103px,
+          transparent           104px,
+          transparent           190px,
+          rgba(180,235,255,0.025) 191px,
+          rgba(180,235,255,0.045) 198px,
+          transparent           199px,
+          transparent           310px
+        );
+        
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          black 0%,
+          black 15%,
+          transparent 60%
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          black 0%,
+          black 15%,
+          transparent 60%
+        );
+        
+        animation: raysShift2 26s ease-in-out infinite alternate;
+        }
+        
+        @keyframes raysShift2 {
+        0%   { transform: rotate( 1.2deg) translateX( 14px); opacity: 0.6; }
+        50%  { opacity: 0.9; }
+        100% { transform: rotate(-2.1deg) translateX(-20px); opacity: 0.55; }
+        }
+        
+        /* =============================================
+         CAUSTIC SHIMMER — tiny dappled highlights
+         simulating the refraction pattern on the
+         sea floor / objects in the water column
+         ============================================= */
+        /* body.mode-light .caustics {    <div class="caustics"></div> inside body */
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        
+        background-image:
+          radial-gradient(ellipse 3px 5px at 18% 12%, rgba(255,255,255,0.35) 0%, transparent 100%),
+          radial-gradient(ellipse 4px 3px at 43% 8%,  rgba(255,255,255,0.28) 0%, transparent 100%),
+          radial-gradient(ellipse 2px 4px at 67% 15%, rgba(255,255,255,0.32) 0%, transparent 100%),
+          radial-gradient(ellipse 5px 3px at 82% 6%,  rgba(255,255,255,0.22) 0%, transparent 100%),
+          radial-gradient(ellipse 3px 6px at 31% 22%, rgba(255,255,255,0.18) 0%, transparent 100%),
+          radial-gradient(ellipse 4px 2px at 57% 19%, rgba(255,255,255,0.25) 0%, transparent 100%),
+          radial-gradient(ellipse 2px 5px at 74% 25%, rgba(255,255,255,0.20) 0%, transparent 100%);
+        
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 35%);
+        mask-image: linear-gradient(to bottom, black 0%, transparent 35%);
+        
+        animation: causticDrift 8s ease-in-out infinite alternate;
+        opacity: 0.7;
+        }
+        
+        @keyframes causticDrift {
+        0%   { transform: translate(  0px,  0px) scale(1.00); opacity: 0.55; }
+        25%  { transform: translate(  3px,  2px) scale(1.02); opacity: 0.75; }
+        50%  { transform: translate( -2px,  4px) scale(0.98); opacity: 0.65; }
+        75%  { transform: translate(  4px, -1px) scale(1.01); opacity: 0.80; }
+        100% { transform: translate( -3px,  3px) scale(1.00); opacity: 0.60; }
+        }
+        
+        body.mode-dark::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.2) 0%,
+          rgba(0, 0, 0, 0.6) 40%,
+          rgba(0, 0, 0, 0.9) 100%
+        );
+        }
+        
+        /* slight blue depth tint */
+        body.mode-dark::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        
+        background: radial-gradient(
+          circle at 50% 20%,
+          rgba(80,120,255,0.08),
+          transparent 60%
+        );
+        }
+        
+        .mode-transition {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        overflow: hidden;
+        }
+        
+        .mode-transition span {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(180, 220, 255, 0.2);
+        backdrop-filter: blur(4px);
+        animation: bubblePop 1s ease forwards;
+        }
+        
+        @keyframes bubblePop {
+        0% {
+          transform: translateY(0) translateX(var(--drift)) scale(0);
+          opacity: 0.4;
+        }
+        50% {
+          transform: translateY(-50vh) scale(4);
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-120vh) scale(8);
+          opacity: 0;
+        }
+        }
+    </style>
 </head>
 
 <body>
-<div class="bg">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-  <section class="Header">
-      <h1 data-id="title">Dhika's Coding Journey</h1>
-<hr>
-  </section>
-<div class="Intro">
-  <h2 data-id="_intro">Introduction</h2>
-  <p data-id="intro">
-    I'm learning coding slowly, not to rush, but to understand.  <br>
-    Every line I write is part of a process — sometimes messy, sometimes clear.  <br>
-    But I keep going, step by step, building something real in my own way.
-  </p>
-</div>
-<div class="About">
-  <h2 data-id="about">About me</h2>
-  <p data-id="about_intro">    My name is <em>Dhika Albani.</em> I’m building myself through coding, philosophy, and disciplined growth. <br>
-   step by step.</p>
-    <div class="bio">
-      <p><strong data-id="bio_age">Age:</strong> 14</p>
-      <p><strong data-id="bio_focus">Focus:</strong> Coding, mindset, growth</p>
-      <p><strong data-id="bio_style">Style:</strong> Calm, Aware, Consistent</p>
-      <p><strong data-id="bio_goal">Goal:</strong> Build myself before building big things.</p>
-      <p><strong data-id="bio_favorites">Favorites:</strong> Sky, Water, Air</p>
+    <!--<div class="ray-layer"></div>-->
+    <div class="bg">
+        <div class="layer back"></div>
+        <div class="layer mid"></div>
+        <div class="layer front"></div>
     </div>
-</div>
-<div class="Journey">
-  <h2 data-id="journey">Journey log</h2>
-  <div class="log">
-    <p class="date">April 20, 2026</p>
-    <p data-id="A20">Exploring the externality. <br> Learned about reality further more in the external, knowing everyone, every humans is the same but with each different flow just like me itself.
-    </p>
-  </div>
-  <div class="log">
-    <p class="date">April 19, 2026</p>
-    <p data-id="A19">Started building this page. <br> Learning how to control layout, animation. And creating something calm and personal.</p>
-  </div>
-  <div class="log">
-    <p class="date">April 18, 2026</p>
-    <p data-id="A18">Realized that consistency comes not from force, but from staying aware in small actions.<br> Not rushing, but moving step by step without loss of consistency.</p>
-  </div>
-  <p data-id="GS">View my Growth System(GS) for more:</p> <a href="https://www.notion.so/ca867815d15846e0b5b6165a872fdee2" target="_blank" class="btn"> View my Growth System.</a>
-</div>
-<div class="Concepts">
-  <h2 data-id="concepts">Concepts</h2>
-  <div class="concept-item">
-    <div class="concept-number">01</div>
-    <div class="glow-wrapper"><img src="file_00000000c0f07208adc289ffb87839df.png" alt="Concept Image" class="concept-img"></div>
-  <span class="linebreak"></span>
-    <p><strong>Presence as Reality</strong></p>
-    <p data-id="par_desc">Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.</p>
-    <div class="subcon">
-      <div class="subcon-item">
-        <div class="subcon-title"><span class="label">Presence as Clarity</span>
-  <span class="indicator"></span></div>
-        
-        <div class="subcon-content" data-id="pac_con">Seeing things as they are without distortion.</div>
-      </div>
-      <div class="subcon-item">
-        <div class="subcon-title"><span class="label">Presence as Acceptance</span>
-  <span class="indicator"></span></div>
-        
-        <div class="subcon-content" data-id="paa_con">Allowing reality without resistance.</div>
-      </div>
-      <div class="subcon-item">
-        <div class="subcon-title"><span class="label">Presence as Simplicity</span>
-  <span class="indicator"></span></div>
-      
-      <div class="subcon-content" data-id="pas_con">Reducing unnecessary thinking, become simple with reality.</div>
-      </div>
-      <div class="subcon-item">
-        <div class="subcon-title"><span class="label">Presence as Stability</span>
-  <span class="indicator"></span></div>
-        
-        <div class="subcon-content" data-id="pasc_con">Staying steady regardless of situation.</div>
-      </div>
-      <div class="subcon-item">
-        <div class="subcon-title"><span class="label">Presence as Decision</span>
-  <span class="indicator"></span></div>
-        
-        <div class="subcon-content" data-id="pad_con">Acting clearly without overthinking.</div>
-      </div>
+    <section class="Header">
+        <h1 data-id="title">Dhika's Coding Journey</h1>
+        <hr>
+    </section>
+    <div class="Intro">
+        <h2 data-id="_intro">Introduction</h2>
+        <p data-id="intro">
+            I'm learning coding slowly, not to rush, but to understand. <br>
+            Every line I write is part of a process — sometimes messy, sometimes clear. <br>
+            But I keep going, step by step, building something real in my own way.
+        </p>
     </div>
-  </div>
- <div class="concept-item">
-  <div class="concept-number">02</div>
-<div class="glow-wrapper"><img src="file_00000000901871faad077a2004189fee.png" alt="Concept Image" class="concept-img"></div>
-  <span class="linebreak"></span>
-  <p><strong>Personal Sanctuary</strong></p>
-<p><em>The Imagination</em></p>
-<p data-id="ps_desc">
-A place beyond reality that reflects your inner state.
-Not entered by force, but revealed through presence.
-</p>
-
-<div class="subcon">
-  <div class="subcon-item">
-  <div class="subcon-title"><span class="label"><strong>The Entrance</strong></span>
-  <span class="indicator"></span></div>
-  
-  <div class="subcon-content" data-id="te_con">A White Door appears only in still moments — when the world softens and your mind is quiet enough to notice it.
-
-It does not invite you.
-It simply exists.
-
-And whether you see it or not… depends on your awareness.
-  </div>
-  </div>
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>The Plain</strong></span>
-  <span class="indicator"></span></div>
-    
-    <div class="subcon-content" data-id="tp_con">Beyond the door lies an endless field beneath a silent sky.
-
-At the center stands a single tree — The One.
-
-The world is not fixed.
-It responds to you.
-
-Peace shapes it into a sanctuary.
-Restlessness turns it into something… unfamiliar.
+    <div class="About">
+        <h2 data-id="about">About me</h2>
+        <p data-id="about_intro"> My name is <em>Dhika Albani.</em> I’m building myself through coding, philosophy, and disciplined growth. <br>
+            step by step.</p>
+        <div class="bio">
+            <p><strong data-id="bio_age">Age:</strong> 14</p>
+            <p><strong data-id="bio_focus">Focus:</strong> Coding, mindset, growth</p>
+            <p><strong data-id="bio_style">Style:</strong> Calm, Aware, Consistent</p>
+            <p><strong data-id="bio_goal">Goal:</strong> Build myself before building big things.</p>
+            <p><strong data-id="bio_favorites">Favorites:</strong> Sky, Water, Air</p>
+        </div>
     </div>
-  </div>
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>The One</strong></span>
-  <span class="indicator"></span></div>
-    
-    <div class="subcon-content" data-id="to_con">The One does not move, does not speak.
-
-Yet its presence decides everything.
-
-If it welcomes you, the field breathes with you.
-
-If it does not… the silence becomes heavy.
+    <div class="Journey">
+        <h2 data-id="journey">Journey log</h2>
+        <div class="log">
+            <p class="date">April 20, 2026</p>
+            <p data-id="A20">Exploring the externality. <br> Learned about reality further more in the external, knowing everyone, every humans is the same but with each different flow just like me itself.
+            </p>
+        </div>
+        <div class="log">
+            <p class="date">April 19, 2026</p>
+            <p data-id="A19">Started building this page. <br> Learning how to control layout, animation. And creating something calm and personal.</p>
+        </div>
+        <div class="log">
+            <p class="date">April 18, 2026</p>
+            <p data-id="A18">Realized that consistency comes not from force, but from staying aware in small actions.<br> Not rushing, but moving step by step without loss of consistency.</p>
+        </div>
+        <p data-id="GS">View my Growth System(GS) for more:</p> <a href="https://www.notion.so/ca867815d15846e0b5b6165a872fdee2" target="_blank" class="btn"> View my Growth System.</a>
     </div>
-  </div>
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>The Unknowns</strong></span>
-  <span class="indicator"></span></div>
-    
-    <div class="subcon-content" data-id="tu_con">From the distant grass, they appear.
+    <div class="Concepts">
+        <h2 data-id="concepts">Concepts</h2>
+        <div class="concept-item">
+            <div class="concept-number">01</div>
+            <div class="glow-wrapper"><img src="file_00000000c0f07208adc289ffb87839df.png" alt="Concept Image" class="concept-img"></div>
+            <span class="linebreak"></span>
+            <p><strong>Presence as Reality</strong></p>
+            <p data-id="par_desc">Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.</p>
+            <div class="subcon">
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label">Presence as Clarity</span>
+                        <span class="indicator"></span>
+                    </div>
 
-Not approaching. Not attacking.
+                    <div class="subcon-content" data-id="pac_con">Seeing things as they are without distortion.</div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label">Presence as Acceptance</span>
+                        <span class="indicator"></span>
+                    </div>
 
-Only watching.
+                    <div class="subcon-content" data-id="paa_con">Allowing reality without resistance.</div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label">Presence as Simplicity</span>
+                        <span class="indicator"></span>
+                    </div>
 
-They are not creatures of that place—
-they are reflections of what you have not faced.
+                    <div class="subcon-content" data-id="pas_con">Reducing unnecessary thinking, become simple with reality.</div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label">Presence as Stability</span>
+                        <span class="indicator"></span>
+                    </div>
+
+                    <div class="subcon-content" data-id="pasc_con">Staying steady regardless of situation.</div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label">Presence as Decision</span>
+                        <span class="indicator"></span>
+                    </div>
+
+                    <div class="subcon-content" data-id="pad_con">Acting clearly without overthinking.</div>
+                </div>
+            </div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-number">02</div>
+            <div class="glow-wrapper"><img src="file_00000000901871faad077a2004189fee.png" alt="Concept Image" class="concept-img"></div>
+            <span class="linebreak"></span>
+            <p><strong>Personal Sanctuary</strong></p>
+            <p><em>The Imagination</em></p>
+            <p data-id="ps_desc">
+                A place beyond reality that reflects your inner state.
+                Not entered by force, but revealed through presence.
+            </p>
+
+            <div class="subcon">
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>The Entrance</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+
+                    <div class="subcon-content" data-id="te_con">A White Door appears only in still moments — when the world softens and your mind is quiet enough to notice it.
+
+                        It does not invite you.
+                        It simply exists.
+
+                        And whether you see it or not… depends on your awareness.
+                    </div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>The Plain</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+
+                    <div class="subcon-content" data-id="tp_con">Beyond the door lies an endless field beneath a silent sky.
+
+                        At the center stands a single tree — The One.
+
+                        The world is not fixed.
+                        It responds to you.
+
+                        Peace shapes it into a sanctuary.
+                        Restlessness turns it into something… unfamiliar.
+                    </div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>The One</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+
+                    <div class="subcon-content" data-id="to_con">The One does not move, does not speak.
+
+                        Yet its presence decides everything.
+
+                        If it welcomes you, the field breathes with you.
+
+                        If it does not… the silence becomes heavy.
+                    </div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>The Unknowns</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+
+                    <div class="subcon-content" data-id="tu_con">From the distant grass, they appear.
+
+                        Not approaching. Not attacking.
+
+                        Only watching.
+
+                        They are not creatures of that place—
+                        they are reflections of what you have not faced.
+                    </div>
+                </div>
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>The Truth</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+
+                    <div class="subcon-content" data-id="tt_con">
+                        This place was never separate from reality.
+
+                        It is where your thoughts take form—
+                        where your mind reveals itself without disguise.
+
+                        Not illusion.
+
+                        But a mirror.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-number">03</div>
+            <div class="glow-wrapper"><img src="file_00000000179c7208a6eaec93fdf5e509.png" alt="Concept Image" class="concept-img"></div>
+            <span class="linebreak"></span>
+            <p><strong>Friend with Reality</strong></p>
+
+            <p data-id="fwr_desc">
+                Reality is not against you. It is neutral.
+                But your relationship with it defines your experience.
+            </p>
+
+            <div class="subcon">
+
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>Seeing Others Clearly</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+                    <div class="subcon-content" data-id="soc_con">
+                        People are not above or below you. They are just moving in their own flow.
+                    </div>
+                </div>
+
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>Dropping Internal Pressure</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+                    <div class="subcon-content" data-id="dip_con">
+                        Most fear comes from your own interpretation, not reality itself.
+                    </div>
+                </div>
+
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>Moving With Reality</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+                    <div class="subcon-content" data-id="mwr_con">
+                        Instead of resisting situations, align with what is happening and respond clearly.
+                    </div>
+                </div>
+
+                <div class="subcon-item">
+                    <div class="subcon-title"><span class="label"><strong>Social Simplicity</strong></span>
+                        <span class="indicator"></span>
+                    </div>
+                    <div class="subcon-content" data-id="ss_con">
+                        Interaction becomes lighter when you stop overthinking how you are seen.
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>The Truth</strong></span>
-  <span class="indicator"></span></div>
-    
-    <div class="subcon-content" data-id="tt_con">
-      This place was never separate from reality.
 
-It is where your thoughts take form—
-where your mind reveals itself without disguise.
-
-Not illusion.
-
-But a mirror.
+    <div class="Insight">
+        <h2 data-id="insight">Insight</h2>
+        <p id="quote">Loading. . .</p>
+        <button class="btn" onclick="randomQuote()" data-id="newinsight">New Insight</button>
     </div>
-  </div>
-</div>
-</div>
-<div class="concept-item">
-  <div class="concept-number">03</div>
-  <div class="glow-wrapper"><img src="file_00000000179c7208a6eaec93fdf5e509.png" alt="Concept Image" class="concept-img"></div>
-  <span class="linebreak"></span>
-<p><strong>Friend with Reality</strong></p>
 
-<p data-id="fwr_desc">
-Reality is not against you. It is neutral.
-But your relationship with it defines your experience.
-</p>
-
-<div class="subcon">
-
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>Seeing Others Clearly</strong></span>
-  <span class="indicator"></span></div>
-    <div class="subcon-content" data-id="soc_con">
-      People are not above or below you. They are just moving in their own flow.
+    <div class="nav-ball"></div>
+    <div class="nav-menu">
+        <div class="menu-item" onclick="scrollToTop()">↑</div>
+        <div class="menu-item" onclick="scrollToSection('.About')">A</div>
+        <div class="menu-item" onclick="scrollToSection('.Journey')">J</div>
+        <div class="menu-item" onclick="scrollToSection('.Concepts')">C</div>
+        <div class="menu-item" onclick="toggleMusic()">♪</div>
     </div>
-  </div>
+    <audio id="bg-music" loop>
+        <source src="pixelmusic.mp3" type="audio/mpeg">
+    </audio>
+    <div class="footer">
+        <div class="footer-content">
 
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>Dropping Internal Pressure</strong></span>
-  <span class="indicator"></span></div>
-    <div class="subcon-content" data-id="dip_con">
-      Most fear comes from your own interpretation, not reality itself.
+            <p data-id="copyright">© 2026 Dhika Albani</p>
+            <p data-id="built">Built with calm, awareness, and consistency.</p>
+
+            <div class="settings">
+                <h3 data-id="settings">Settings</h3>
+
+                <div class="setting-item">
+                    Language:
+                    <button onclick="setLang('id')">ID</button>
+                    <button onclick="setLang('jp')">JP</button>
+                    <button onclick="setLang('en')">EN</button>
+                </div>
+                <div class="setting-item">
+                    background:
+                    <button onclick="setBG('bubble')">Bubble</button>
+                    <button onclick="setBG('rain')">Rain</button>
+                    <button onclick="setBG('snow')">Snow</button>
+                    <button onclick="setBG('fish')">Fish</button>
+                </div>
+                <div class="setting-item">
+                    mode:
+                    <button onclick="setMode('default')">Default</button>
+                    <button onclick="setMode('light')">Light</button>
+                    <button onclick="setMode('dark')">Dark</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>Moving With Reality</strong></span>
-  <span class="indicator"></span></div>
-    <div class="subcon-content" data-id="mwr_con">
-      Instead of resisting situations, align with what is happening and respond clearly.
-    </div>
-  </div>
-
-  <div class="subcon-item">
-    <div class="subcon-title"><span class="label"><strong>Social Simplicity</strong></span>
-  <span class="indicator"></span></div>
-    <div class="subcon-content" data-id="ss_con">
-      Interaction becomes lighter when you stop overthinking how you are seen.
-    </div>
-  </div>
-
-</div>
-</div>
-</div>
-
-<div class="Insight">
-  <h2 data-id="insight">Insight</h2>
-  <p id="quote">Loading. . .</p>
-  <button class="btn" onclick="randomQuote()" data-id="newinsight">New Insight</button>
-</div>
-
-<div class="nav-ball"></div>
-<div class="nav-menu">
-  <div class="menu-item" onclick="scrollToTop()" >↑</div>
-  <div class="menu-item" onclick="scrollToSection('.About')">A</div>
-  <div class="menu-item" onclick="scrollToSection('.Journey')">J</div>
-  <div class="menu-item" onclick="scrollToSection('.Concepts')">C</div>
-  <div class="menu-item" onclick="toggleMusic()">♪</div>
-</div>
-<audio id="bg-music" loop>
-  <source src="pixelmusic.mp3" type="audio/mpeg">
-</audio>
-<div class="footer">
-  <div class="footer-content">
-    
-    <p data-id="copyright">© 2026 Dhika Albani</p>
-    <p data-id="built">Built with calm, awarenss, and consistency.</p>
-    
-    <div class="settings">
-      <h3 data-id="settings">Settings</h3>
-      
-      <div class="setting-item">
-        Language:
-        <button onclick="setLang('id')">ID</button>
-        <button onclick="setLang('jp')">JP</button>
-        <button onclick="setLang('en')">EN</button>
-      </div>
-      <div class="setting-item">
-        background:
-        <button onclick="setBG('bubble')">Bubble</button>
-        <button onclick="setBG('rain')">Rain</button>
-        <button onclick="setBG('snow')">Snow</button>
-        <button onclick="setBG('fish')">Fish</button>
-      </div>
-    </div>
-  </div>
-</div>
+    <div class="mode-transition"></div>
 </body>
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const bg = document.querySelector(".bg");
-let maxBubbles = 25;
-
-function createBubble() {
-  if (document.querySelectorAll(".bg span").length > maxBubbles) return;
-
-  const bubble = document.createElement("span");
-
-  const size = Math.random() * 20 + 10;
-  bubble.style.width = size + "px";
-  bubble.style.height = size + "px";
-  bubble.style.left = Math.random() * 100 + "%";
-  bubble.style.animationDuration = (Math.random() * 10 + 10) + "s";
-
-  const drift = (Math.random() * 100 - 50) + "px";
-  bubble.style.setProperty("--drift", drift);
-
-  document.querySelector(".bg").appendChild(bubble);
-
-  setTimeout(() => bubble.remove(), 15000);
-}
-
-  });
-  document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    document.querySelectorAll(".bg span").forEach(el => {
-      el.style.animationPlayState = "paused";
-    });
-  } else {
-    document.querySelectorAll(".bg span").forEach(el => {
-      el.style.animationPlayState = "running";
-    });
-  }
-});
-  const journey = document.querySelector(".Journey");
-  window.addEventListener("scroll", () => { 
-    const rect = journey.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      journey.style.opacity = "1";
-      journey.style.transform = "translateX(0)";
-    }
-  })
-  const concepts = document.querySelector(".Concepts");
-  window.addEventListener("scroll", () => {
-    const rect = concepts.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100)
-    {
-      concepts.style.opacity = "1";
-      concepts.style.transform = "translateY(0)"
-    }
-  })
-  document.querySelectorAll(".subcon-item").forEach(item => {
-    item.addEventListener("click", () => {
-      document.querySelectorAll(".subcon-item").forEach( i => {
-        if (i !== item)
-        i.classList.remove("active")
+<script>
+    const journey = document.querySelector(".Journey");
+    window.addEventListener("scroll", () => { 
+      const rect = journey.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        journey.style.opacity = "1";
+        journey.style.transform = "translateX(0)";
+      }
+    })
+    const concepts = document.querySelector(".Concepts");
+    window.addEventListener("scroll", () => {
+      const rect = concepts.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100)
+      {
+        concepts.style.opacity = "1";
+        concepts.style.transform = "translateY(0)"
+      }
+    })
+    document.querySelectorAll(".subcon-item").forEach(item => {
+      item.addEventListener("click", () => {
+        document.querySelectorAll(".subcon-item").forEach( i => {
+          if (i !== item)
+          i.classList.remove("active")
+        });
+        item.classList.toggle("active");
       });
-      item.classList.toggle("active");
     });
-  });
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  }
-  const navBall = document.querySelector(".nav-ball");
-  window.addEventListener("scroll", () => { 
-    if (window.scrollY > 200) { navBall.classList.add("show");} else { navBall.classList.remove("show");}
-  })
-  const navMenu = document.querySelector(".nav-menu");
-navBall.addEventListener("click", () => {
-  if (navMenu.classList.contains("show")) {
-    navMenu.classList.add("closing");
-    setTimeout(() => {
-      navMenu.classList.remove("show", "closing");
-    }, 200);
-  } else {
-    navMenu.classList.add("show");
-  }
-});
-  function scrollToSection(selector) { document.querySelector(selector).scrollIntoView({
-    behavior: "smooth"
-  });
-  }
-  document.addEventListener("click", (e) => {
-    if (!navBall.contains(e.target) && ! navMenu.contains(e.target)) {
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+    const navBall = document.querySelector(".nav-ball");
+    window.addEventListener("scroll", () => { 
+      if (window.scrollY > 200) { navBall.classList.add("show");} else { navBall.classList.remove("show");}
+    })
+    const navMenu = document.querySelector(".nav-menu");
+    navBall.addEventListener("click", () => {
+    if (navMenu.classList.contains("show")) {
       navMenu.classList.add("closing");
       setTimeout(() => {
-      navMenu.classList.remove("show");
-      navMenu.classList.remove("closing");
+        navMenu.classList.remove("show", "closing");
       }, 200);
+    } else {
+      navMenu.classList.add("show");
     }
-  })
-// ===== MUSIC CONTROL =====
-const music = document.getElementById("bg-music");
-const menuItems = document.querySelectorAll(".menu-item");
-const musicBtn = menuItems[4];
-
-function toggleMusic() {
-  let fadeInterval = null;
-  if (music.paused) {
-    music.volume = 0;
-    music.play().catch(() => {});
-
-    let vol = 0;
-    const fadeIn = setInterval(() => {
-      vol += 0.05;
-
-      if (vol >= 1) {
-        vol = 1;
-        clearInterval(fadeIn);
-      }
-
-      music.volume = vol;
-    }, 50);
-
-    musicBtn.classList.add("active");
-
-  } else {
-    let vol = music.volume;
-
-    const fadeOut = setInterval(() => {
-      vol -= 0.05;
-
-      if (vol <= 0) {
-        vol = 0;
-        clearInterval(fadeOut);
-        music.pause();
-      }
-
-      music.volume = vol;
-    }, 50);
-
-    musicBtn.classList.remove("active");
-  }
-}
-
-// ===== MENU CLICK EFFECT =====
-menuItems.forEach((item, index) => {
-  item.addEventListener("click", () => {
-
-    // reset semua kecuali music
-    menuItems.forEach((i, iIndex) => {
-      if (iIndex !== 4) i.classList.remove("active");
     });
-
-    // kalau bukan music → highlight sebentar
-    if (index !== 4) {
-      item.classList.add("active");
-
-      setTimeout(() => {
-        item.classList.remove("active");
-      }, 600);
+    function scrollToSection(selector) { document.querySelector(selector).scrollIntoView({
+      behavior: "smooth"
+    });
     }
-  });
-});
-
-const quotes = [
-  "Reality is simple. The mind makes it complicated. — Dhika",
-  "Clarity comes when you stop forcing meaning. — Dhika",
-  "River flows, everyone moves. Know it that everyone has their own flows. — Dhika",
-  "Acceptance with reality doesn't means a hopeless. But to savor every detail in your moments. — Dhika",
-  "Awareness is enough. — Dhika",
-  "Let things happen, then respond. — Dhika",
-  "Try to look at the most simple thing, sky, water, clouds. And you will feel it. — Dhika",
-  "You are not behind. You are just moving. — Dhika",
-  "Reality doesn't care but i choose to care. — Dhika",
-  "The only true wisdom is in knowing you know nothing. — Socrates",
-  "You have power over your mind - not outside events. Realize this, and you will find strength. — Marcus Aurelius",
-  "There are no facts, only interpretations. — Friedrich Nietzsche",
-  "It is not that we have a short life, but that we make it short. — Seneca",
-  "If you're lonely when you're alone, you're in bad company. — Sartre",
-  "Mostly it is loss which teaches us about the worth of things. — Schopenhauer",
-  "Who looks outside, dreams; who looks inside, awakes. — Carl Jung",
-  "Thinking is difficult, that's why most people judge. — Carl Jung",
-  "Knowing your own darkness is the best method for dealing with the darknesses of other people. — Carl Jung",
-  "Imagination is more important than knowledge. — Albert Einstein"
-  ];
-  function randomQuote() {
-    const q = 
-    quotes[Math.floor(Math.random() * quotes.length)];
-    document.getElementById("quote").innerText = q;
-  }
-  randomQuote();
-  
-let currentBG = "bubble";
-
-function setBG(type) {
-  localStorage.setItem("bg", type);
-  currentBG = type;
-
-  if (type === "bubble") startBubble();
-  if (type === "rain") startRain();
-  if (type === "snow") startSnow();
-  if (type === "fish") startFish();
-  
-  document.querySelectorAll(".setting-item button").forEach(btn => {
-  btn.style.opacity = "0.5";
-});
-
-document.querySelectorAll(".setting-item button").forEach(btn => {
-  if (btn.textContent.toLowerCase() === type) {
-    btn.style.opacity = "1";
-  }
-});
-}
-
-window.onload = () => {
-  const lang = detectLang()
-  setLang(lang);
-
-  const savedBG = localStorage.getItem("bg") || "bubble";
-  setBG(savedBG);
-};
-
-const langData = {
-  id: {
-    title: "Perjalanan Coding Dhika",
-    _intro: "Perkenalan",
-    intro: "Saya belajar coding secara perlahan, bukan untuk terburu-buru, tapi untuk memahami. Setiap baris yang saya tulis adalah bagian dari proses — kadang berantakan, kadang jelas. Tapi saya tetap berjalan, langkah demi langkah.",
-
-    about: "Tentang Saya",
-    about_intro: "Nama saya Dhika Albani. Saya membangun diri melalui coding, filosofi, dan pertumbuhan disiplin. Langkah demi langkah.",
-
-    bio_age: "Umur",
-    bio_focus: "Fokus",
-    bio_style: "Gaya",
-    bio_goal: "Tujuan",
-    bio_favorites: "Favorit",
-
-    journey: "Catatan Perjalanan",
-    A20: "Menjelajahi eksternalitas. Belajar lebih dalam tentang realita di luar, memahami bahwa setiap orang sama, namun memiliki alurnya masing-masing seperti diri saya sendiri.",
-    A19: "Mulai membangun halaman ini. Belajar mengatur layout, animasi, dan menciptakan sesuatu yang tenang dan personal.",
-    A18: "Menyadari bahwa konsistensi bukan berasal dari paksaan, tetapi dari kesadaran dalam tindakan kecil. Tidak terburu-buru, tapi tetap bergerak langkah demi langkah tanpa kehilangan konsistensi.",
-    GS: "Lihat Growth System (GS) saya untuk lebih lanjut:",
-
-    concepts: "Konsep",
-
-    par_desc: "Menjadi sepenuhnya sadar terhadap apa yang sedang terjadi, tanpa menambahkan pikiran yang tidak perlu. Realita bukan apa yang kamu bayangkan — tapi apa yang ada di depanmu.",
-    pac_con: "Melihat sesuatu apa adanya tanpa distorsi.",
-    paa_con: "Menerima realita tanpa perlawanan.",
-    pas_con: "Mengurangi pikiran yang tidak perlu, menjadi sederhana dengan realita.",
-    pasc_con: "Tetap stabil dalam situasi apapun.",
-    pad_con: "Bertindak dengan jelas tanpa overthinking.",
-
-    ps_desc: "Tempat di luar realita yang mencerminkan keadaan dalam dirimu. Bukan dimasuki dengan paksaan, tapi muncul melalui kehadiran.",
-    te_con: "Sebuah pintu putih muncul hanya di momen tenang — ketika dunia melunak dan pikiran cukup hening untuk menyadarinya. Ia tidak mengundang. Ia hanya ada.",
-    tp_con: "Di balik pintu terdapat padang luas tanpa batas di bawah langit sunyi. Dunia ini merespon dirimu.",
-    to_con: "The One tidak bergerak dan tidak berbicara, tapi kehadirannya menentukan segalanya.",
-    tu_con: "Mereka muncul dari kejauhan. Bukan menyerang, hanya mengamati. Mereka adalah refleksi dari hal yang belum kamu hadapi.",
-    tt_con: "Tempat ini bukan terpisah dari realita. Ini adalah cerminan dari pikiranmu sendiri.",
-
-    fwr_desc: "Realita tidak melawanmu. Ia netral. Tapi hubunganmu dengannya menentukan pengalamanmu.",
-    soc_con: "Orang lain tidak lebih tinggi atau rendah. Mereka hanya bergerak dalam alurnya masing-masing.",
-    dip_con: "Sebagian besar rasa takut berasal dari interpretasi diri, bukan realita itu sendiri.",
-    mwr_con: "Daripada melawan situasi, selaraskan diri dan respon dengan jelas.",
-    ss_con: "Interaksi menjadi lebih ringan ketika kamu berhenti overthinking tentang bagaimana kamu dilihat.",
-
-    insight: "Wawasan",
-    newinsight: "Wawasan Baru",
-
-    copyright: "© 2026 Dhika Albani",
-    built: "Dibangun dengan ketenangan, kesadaran, dan konsistensi.",
-    settings: "Pengaturan"
-  },
-
-  en: {
-    title: "Dhika's Coding Journey",
-    _intro: "Introduction",
-    intro: "I'm learning coding slowly, not to rush, but to understand. Every line I write is part of a process — sometimes messy, sometimes clear. But I keep going, step by step, building something real in my own way.",
-
-    about: "About Me",
-    about_intro: "My name is Dhika Albani. I’m building myself through coding, philosophy, and disciplined growth. Step by step.",
-
-    bio_age: "Age",
-    bio_focus: "Focus",
-    bio_style: "Style",
-    bio_goal: "Goal",
-    bio_favorites: "Favorites",
-
-    journey: "Journey Log",
-    A20: "Exploring the external. Learning more about reality outside, realizing that everyone is the same, but each moves in their own flow just like me.",
-    A19: "Started building this page. Learning layout, animation, and creating something calm and personal.",
-    A18: "Realized that consistency comes not from force, but from awareness in small actions. Not rushing, but moving step by step without losing consistency.",
-    GS: "View my Growth System (GS) for more:",
-
-    concepts: "Concepts",
-
-    par_desc: "Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.",
-    pac_con: "Seeing things as they are without distortion.",
-    paa_con: "Allowing reality without resistance.",
-    pas_con: "Reducing unnecessary thinking and becoming simple with reality.",
-    pasc_con: "Staying stable regardless of situation.",
-    pad_con: "Acting clearly without overthinking.",
-
-    ps_desc: "A place beyond reality that reflects your inner state. Not entered by force, but revealed through presence.",
-    te_con: "A white door appears only in still moments — when the world softens and your mind is quiet enough to notice it.",
-    tp_con: "Beyond the door lies an endless field beneath a silent sky. The world responds to you.",
-    to_con: "The One does not move or speak, yet its presence decides everything.",
-    tu_con: "They appear from afar. Not attacking, only watching. They are reflections of what you have not faced.",
-    tt_con: "This place was never separate from reality. It is a reflection of your own mind.",
-
-    fwr_desc: "Reality is not against you. It is neutral. But your relationship with it defines your experience.",
-    soc_con: "People are not above or below you. They are simply moving in their own flow.",
-    dip_con: "Most fear comes from your own interpretation, not reality itself.",
-    mwr_con: "Instead of resisting situations, align with them and respond clearly.",
-    ss_con: "Interaction becomes lighter when you stop overthinking how you are seen.",
-
-    insight: "Insight",
-    newinsight: "New Insight",
-
-    copyright: "© 2026 Dhika Albani",
-    built: "Built with calm, awareness, and consistency.",
-    settings: "Settings"
-  },
-  
-jp: {
-  title: "ディカのコーディングの旅",
-  _intro: "イントロダクション",
-  intro: "私は急ぐためではなく、理解するためにゆっくりコーディングを学んでいます。書く一行一行はプロセスの一部であり、時には混乱し、時には明確になります。それでも、一歩ずつ、自分のやり方で進み続けています。",
-
-  about: "私について",
-  about_intro: "私はディカ・アルバニです。コーディング、哲学、そして規律ある成長を通して自分を築いています。一歩ずつ。",
-
-  bio_age: "年齢",
-  bio_focus: "フォーカス",
-  bio_style: "スタイル",
-  bio_goal: "目標",
-  bio_favorites: "好きなもの",
-
-  journey: "記録",
-  A20: "外の世界を探求する。現実についてさらに理解し、人は皆同じでありながら、それぞれ異なる流れを持っていると気づいた。",
-  A19: "このページを作り始めた。レイアウトやアニメーションを学び、落ち着いた個人的なものを作っている。",
-  A18: "一貫性は強制からではなく、小さな行動への意識から生まれると気づいた。急がず、しかし一歩ずつ進み続ける。",
-
-  GS: "グロースシステム（GS）を見る:",
-
-  concepts: "コンセプト",
-
-  par_desc: "今起きていることに完全に気づくこと。不必要な思考を加えない。現実とは想像ではなく、目の前にあるもの。",
-
-  pac_con: "歪みなく物事を見ること。",
-  paa_con: "抵抗せず現実を受け入れること。",
-  pas_con: "不要な思考を減らし、シンプルになること。",
-  pasc_con: "どんな状況でも安定していること。",
-  pad_con: "考えすぎず、明確に行動すること。",
-
-  ps_desc: "現実の外にある、自分の内面を映す場所。無理に入るものではなく、存在の中で現れる。",
-
-  te_con: "静かな瞬間にだけ白い扉が現れる。世界が静まり、心がそれに気づけるほど落ち着いたとき。",
-  tp_con: "扉の先には静かな空の下、果てしない平原が広がる。その世界はあなたに反応する。",
-  to_con: "「The One」は動かず、語らない。しかしその存在がすべてを決める。",
-  tu_con: "遠くから現れる。近づかず、攻撃もしない。ただ見ている。それは向き合っていない自分の一部。",
-  tt_con: "この場所は現実と別ではない。それは自分の心の映し出し。",
-
-  fwr_desc: "現実はあなたに敵対しない。ただ中立である。しかしその関係が体験を決める。",
-
-  soc_con: "人は上下ではない。それぞれの流れの中で動いている。",
-  dip_con: "多くの恐れは現実ではなく、自分の解釈から生まれる。",
-  mwr_con: "抵抗するのではなく、現実に合わせて明確に行動する。",
-  ss_con: "どう見られるかを考えすぎなければ、関係は軽くなる。",
-
-  insight: "インサイト",
-  newinsight: "新しい気づき",
-
-  copyright: "© 2026 ディカ・アルバニ",
-  built: "落ち着き、意識、そして一貫性によって作られた。",
-  settings: "設定"
-}
-};
-
-function setLang(lang) {
-  document.body.style.opacity = 0
-  
-  setTimeout(() => {
-  
-  document.querySelectorAll("[data-id]").forEach(el => {
-    const key = el.getAttribute("data-id");
-
-    if (langData[lang] && langData[lang][key]) {
-      el.innerText = langData[lang][key];
+    document.addEventListener("click", (e) => {
+      if (!navBall.contains(e.target) && ! navMenu.contains(e.target)) {
+        navMenu.classList.add("closing");
+        setTimeout(() => {
+        navMenu.classList.remove("show");
+        navMenu.classList.remove("closing");
+        }, 200);
+      }
+    })
+    // ===== MUSIC CONTROL =====
+    const music = document.getElementById("bg-music");
+    const menuItems = document.querySelectorAll(".menu-item");
+    const musicBtn = menuItems[4];
+    
+    function toggleMusic() {
+    let fadeInterval = null;
+    if (music.paused) {
+      music.volume = 0;
+      music.play().catch(() => {});
+    
+      let vol = 0;
+      const fadeIn = setInterval(() => {
+        vol += 0.05;
+    
+        if (vol >= 1) {
+          vol = 1;
+          clearInterval(fadeIn);
+        }
+    
+        music.volume = vol;
+      }, 50);
+    
+      musicBtn.classList.add("active");
+    
+    } else {
+      let vol = music.volume;
+    
+      const fadeOut = setInterval(() => {
+        vol -= 0.05;
+    
+        if (vol <= 0) {
+          vol = 0;
+          clearInterval(fadeOut);
+          music.pause();
+        }
+    
+        music.volume = vol;
+      }, 50);
+    
+      musicBtn.classList.remove("active");
     }
-  });
-
-document.body.classList.remove("jp");
-
-if (lang === "jp") {
-  document.body.classList.add("jp");
-}
-
-document.querySelectorAll(".setting-item button").forEach(btn => {
-  btn.style.opacity = "0.5";
-});
-
-document.querySelectorAll(".setting-item button").forEach(btn => {
-  if (btn.textContent.toLowerCase() === lang) {
-    btn.style.opacity = "1";
-  }
-});
-
-  localStorage.setItem("lang", lang);
-  document.body.style.opacity = 1;
-  }, 120);
-}
-
-function detectLang() {
-  const saved =
-  localStorage.getItem("lang");
-  if (saved) return saved;
-  
-  const userLang = navigator.language || navigator.userLanguage;
-  
-  if (userLang.startsWith("id"))
-  return "id";
-  if (userLang.startsWith("ja"))
-  return "jp";
-  return "en";
-}
-
-function startBubble() {
-  bgInterval = setInterval(() => {
+    }
+    
+    // ===== MENU CLICK EFFECT =====
+    menuItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
+    
+      // reset semua kecuali music
+      menuItems.forEach((i, iIndex) => {
+        if (iIndex !== 4) i.classList.remove("active");
+      });
+    
+      // kalau bukan music → highlight sebentar
+      if (index !== 4) {
+        item.classList.add("active");
+    
+        setTimeout(() => {
+          item.classList.remove("active");
+        }, 600);
+      }
+    });
+    });
+    
+    const quotes = [
+    "Reality is simple. The mind makes it complicated. — Dhika",
+    "Clarity comes when you stop forcing meaning. — Dhika",
+    "River flows, everyone moves. Know it that everyone has their own flows. — Dhika",
+    "Acceptance with reality doesn't means a hopeless. But to savor every detail in your moments. — Dhika",
+    "Awareness is enough. — Dhika",
+    "Let things happen, then respond. — Dhika",
+    "Try to look at the most simple thing, sky, water, clouds. And you will feel it. — Dhika",
+    "You are not behind. You are just moving. — Dhika",
+    "Reality doesn't care but i choose to care. — Dhika",
+    "The only true wisdom is in knowing you know nothing. — Socrates",
+    "You have power over your mind - not outside events. Realize this, and you will find strength. — Marcus Aurelius",
+    "There are no facts, only interpretations. — Friedrich Nietzsche",
+    "It is not that we have a short life, but that we make it short. — Seneca",
+    "If you're lonely when you're alone, you're in bad company. — Sartre",
+    "Mostly it is loss which teaches us about the worth of things. — Schopenhauer",
+    "Who looks outside, dreams; who looks inside, awakes. — Carl Jung",
+    "Thinking is difficult, that's why most people judge. — Carl Jung",
+    "Knowing your own darkness is the best method for dealing with the darknesses of other people. — Carl Jung",
+    "Imagination is more important than knowledge. — Albert Einstein"
+    ];
+    function randomQuote() {
+    const quoteEl = document.getElementById("quote");
+    quoteEl.style.opacity = 0;
+    
+    setTimeout(() => {
+      const q = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.innerText = q;
+      quoteEl.style.opacity = 0.8;
+    }, 200);
+    }
+    randomQuote();
+    
+    let currentBG = "bubble";
+    
+    function setBG(type) {
+    clearBG()
+    localStorage.setItem("bg", type);
+    currentBG = type;
+    
+    if (type === "bubble") startBubble();
+    if (type === "rain") startRain();
+    if (type === "snow") startSnow();
+    if (type === "fish") startFish();
+    
+    document.querySelectorAll(".setting-item button").forEach(btn => {
+    btn.style.opacity = "0.5";
+    });
+    
+    document.querySelectorAll(".setting-item button").forEach(btn => {
+    if (btn.textContent.toLowerCase() === type) {
+      btn.style.opacity = "1";
+    }
+    });
+    }
+    
+    window.onload = () => {
+    const lang = detectLang()
+    setLang(lang);
+    
+    const savedBG = localStorage.getItem("bg") || "bubble";
+    setBG(savedBG);
+    
+    const savedMode = localStorage.getItem("mode") || "default";
+    setMode(savedMode);
+    
+    updateFish();
+    };
+    
+    const langData = {
+    id: {
+      title: "Perjalanan Coding Dhika",
+      _intro: "Perkenalan",
+      intro: "Saya belajar coding secara perlahan, bukan untuk terburu-buru, tapi untuk memahami. Setiap baris yang saya tulis adalah bagian dari proses — kadang berantakan, kadang jelas. Tapi saya tetap berjalan, langkah demi langkah.",
+    
+      about: "Tentang Saya",
+      about_intro: "Nama saya Dhika Albani. Saya membangun diri melalui coding, filosofi, dan pertumbuhan disiplin. Langkah demi langkah.",
+    
+      bio_age: "Umur",
+      bio_focus: "Fokus",
+      bio_style: "Gaya",
+      bio_goal: "Tujuan",
+      bio_favorites: "Favorit",
+    
+      journey: "Catatan Perjalanan",
+      A20: "Menjelajahi eksternalitas. Belajar lebih dalam tentang realita di luar, memahami bahwa setiap orang sama, namun memiliki alurnya masing-masing seperti diri saya sendiri.",
+      A19: "Mulai membangun halaman ini. Belajar mengatur layout, animasi, dan menciptakan sesuatu yang tenang dan personal.",
+      A18: "Menyadari bahwa konsistensi bukan berasal dari paksaan, tetapi dari kesadaran dalam tindakan kecil. Tidak terburu-buru, tapi tetap bergerak langkah demi langkah tanpa kehilangan konsistensi.",
+      GS: "Lihat Growth System (GS) saya untuk lebih lanjut:",
+    
+      concepts: "Konsep",
+    
+      par_desc: "Menjadi sepenuhnya sadar terhadap apa yang sedang terjadi, tanpa menambahkan pikiran yang tidak perlu. Realita bukan apa yang kamu bayangkan — tapi apa yang ada di depanmu.",
+      pac_con: "Melihat sesuatu apa adanya tanpa distorsi.",
+      paa_con: "Menerima realita tanpa perlawanan.",
+      pas_con: "Mengurangi pikiran yang tidak perlu, menjadi sederhana dengan realita.",
+      pasc_con: "Tetap stabil dalam situasi apapun.",
+      pad_con: "Bertindak dengan jelas tanpa overthinking.",
+    
+      ps_desc: "Tempat di luar realita yang mencerminkan keadaan dalam dirimu. Bukan dimasuki dengan paksaan, tapi muncul melalui kehadiran.",
+      te_con: "Sebuah pintu putih muncul hanya di momen tenang — ketika dunia melunak dan pikiran cukup hening untuk menyadarinya. Ia tidak mengundang. Ia hanya ada.",
+      tp_con: "Di balik pintu terdapat padang luas tanpa batas di bawah langit sunyi. Dunia ini merespon dirimu.",
+      to_con: "The One tidak bergerak dan tidak berbicara, tapi kehadirannya menentukan segalanya.",
+      tu_con: "Mereka muncul dari kejauhan. Bukan menyerang, hanya mengamati. Mereka adalah refleksi dari hal yang belum kamu hadapi.",
+      tt_con: "Tempat ini bukan terpisah dari realita. Ini adalah cerminan dari pikiranmu sendiri.",
+    
+      fwr_desc: "Realita tidak melawanmu. Ia netral. Tapi hubunganmu dengannya menentukan pengalamanmu.",
+      soc_con: "Orang lain tidak lebih tinggi atau rendah. Mereka hanya bergerak dalam alurnya masing-masing.",
+      dip_con: "Sebagian besar rasa takut berasal dari interpretasi diri, bukan realita itu sendiri.",
+      mwr_con: "Daripada melawan situasi, selaraskan diri dan respon dengan jelas.",
+      ss_con: "Interaksi menjadi lebih ringan ketika kamu berhenti overthinking tentang bagaimana kamu dilihat.",
+    
+      insight: "Wawasan",
+      newinsight: "Wawasan Baru",
+    
+      copyright: "© 2026 Dhika Albani",
+      built: "Dibangun dengan ketenangan, kesadaran, dan konsistensi.",
+      settings: "Pengaturan"
+    },
+    
+    en: {
+      title: "Dhika's Coding Journey",
+      _intro: "Introduction",
+      intro: "I'm learning coding slowly, not to rush, but to understand. Every line I write is part of a process — sometimes messy, sometimes clear. But I keep going, step by step, building something real in my own way.",
+    
+      about: "About Me",
+      about_intro: "My name is Dhika Albani. I’m building myself through coding, philosophy, and disciplined growth. Step by step.",
+    
+      bio_age: "Age",
+      bio_focus: "Focus",
+      bio_style: "Style",
+      bio_goal: "Goal",
+      bio_favorites: "Favorites",
+    
+      journey: "Journey Log",
+      A20: "Exploring the external. Learning more about reality outside, realizing that everyone is the same, but each moves in their own flow just like me.",
+      A19: "Started building this page. Learning layout, animation, and creating something calm and personal.",
+      A18: "Realized that consistency comes not from force, but from awareness in small actions. Not rushing, but moving step by step without losing consistency.",
+      GS: "View my Growth System (GS) for more:",
+    
+      concepts: "Concepts",
+    
+      par_desc: "Being fully aware of what is happening now, without adding unnecessary thoughts. Reality is not what you imagine — it is what is directly in front of you.",
+      pac_con: "Seeing things as they are without distortion.",
+      paa_con: "Allowing reality without resistance.",
+      pas_con: "Reducing unnecessary thinking and becoming simple with reality.",
+      pasc_con: "Staying stable regardless of situation.",
+      pad_con: "Acting clearly without overthinking.",
+    
+      ps_desc: "A place beyond reality that reflects your inner state. Not entered by force, but revealed through presence.",
+      te_con: "A white door appears only in still moments — when the world softens and your mind is quiet enough to notice it.",
+      tp_con: "Beyond the door lies an endless field beneath a silent sky. The world responds to you.",
+      to_con: "The One does not move or speak, yet its presence decides everything.",
+      tu_con: "They appear from afar. Not attacking, only watching. They are reflections of what you have not faced.",
+      tt_con: "This place was never separate from reality. It is a reflection of your own mind.",
+    
+      fwr_desc: "Reality is not against you. It is neutral. But your relationship with it defines your experience.",
+      soc_con: "People are not above or below you. They are simply moving in their own flow.",
+      dip_con: "Most fear comes from your own interpretation, not reality itself.",
+      mwr_con: "Instead of resisting situations, align with them and respond clearly.",
+      ss_con: "Interaction becomes lighter when you stop overthinking how you are seen.",
+    
+      insight: "Insight",
+      newinsight: "New Insight",
+    
+      copyright: "© 2026 Dhika Albani",
+      built: "Built with calm, awareness, and consistency.",
+      settings: "Settings"
+    },
+    
+    jp: {
+    title: "ディカのコーディングの旅",
+    _intro: "イントロダクション",
+    intro: "私は急ぐためではなく、理解するためにゆっくりコーディングを学んでいます。書く一行一行はプロセスの一部であり、時には混乱し、時には明確になります。それでも、一歩ずつ、自分のやり方で進み続けています。",
+    
+    about: "私について",
+    about_intro: "私はディカ・アルバニです。コーディング、哲学、そして規律ある成長を通して自分を築いています。一歩ずつ。",
+    
+    bio_age: "年齢",
+    bio_focus: "フォーカス",
+    bio_style: "スタイル",
+    bio_goal: "目標",
+    bio_favorites: "好きなもの",
+    
+    journey: "記録",
+    A20: "外の世界を探求する。現実についてさらに理解し、人は皆同じでありながら、それぞれ異なる流れを持っていると気づいた。",
+    A19: "このページを作り始めた。レイアウトやアニメーションを学び、落ち着いた個人的なものを作っている。",
+    A18: "一貫性は強制からではなく、小さな行動への意識から生まれると気づいた。急がず、しかし一歩ずつ進み続ける。",
+    
+    GS: "グロースシステム（GS）を見る:",
+    
+    concepts: "コンセプト",
+    
+    par_desc: "今起きていることに完全に気づくこと。不必要な思考を加えない。現実とは想像ではなく、目の前にあるもの。",
+    
+    pac_con: "歪みなく物事を見ること。",
+    paa_con: "抵抗せず現実を受け入れること。",
+    pas_con: "不要な思考を減らし、シンプルになること。",
+    pasc_con: "どんな状況でも安定していること。",
+    pad_con: "考えすぎず、明確に行動すること。",
+    
+    ps_desc: "現実の外にある、自分の内面を映す場所。無理に入るものではなく、存在の中で現れる。",
+    
+    te_con: "静かな瞬間にだけ白い扉が現れる。世界が静まり、心がそれに気づけるほど落ち着いたとき。",
+    tp_con: "扉の先には静かな空の下、果てしない平原が広がる。その世界はあなたに反応する。",
+    to_con: "「The One」は動かず、語らない。しかしその存在がすべてを決める。",
+    tu_con: "遠くから現れる。近づかず、攻撃もしない。ただ見ている。それは向き合っていない自分の一部。",
+    tt_con: "この場所は現実と別ではない。それは自分の心の映し出し。",
+    
+    fwr_desc: "現実はあなたに敵対しない。ただ中立である。しかしその関係が体験を決める。",
+    
+    soc_con: "人は上下ではない。それぞれの流れの中で動いている。",
+    dip_con: "多くの恐れは現実ではなく、自分の解釈から生まれる。",
+    mwr_con: "抵抗するのではなく、現実に合わせて明確に行動する。",
+    ss_con: "どう見られるかを考えすぎなければ、関係は軽くなる。",
+    
+    insight: "インサイト",
+    newinsight: "新しい気づき",
+    
+    copyright: "© 2026 ディカ・アルバニ",
+    built: "落ち着き、意識、そして一貫性によって作られた。",
+    settings: "設定"
+    }
+    };
+    
+    function setLang(lang) {
+    document.body.style.opacity = 0
+    
+    setTimeout(() => {
+    
+    document.querySelectorAll("[data-id]").forEach(el => {
+      const key = el.getAttribute("data-id");
+    
+      if (langData[lang] && langData[lang][key]) {
+        el.innerText = langData[lang][key];
+      }
+    });
+    
+    document.body.classList.remove("jp");
+    
+    if (lang === "jp") {
+    document.body.classList.add("jp");
+    }
+    
+    document.querySelectorAll(".setting-item button").forEach(btn => {
+    btn.style.opacity = "0.5";
+    });
+    
+    document.querySelectorAll(".setting-item button").forEach(btn => {
+    if (btn.textContent.toLowerCase() === lang) {
+      btn.style.opacity = "1";
+    }
+    });
+    
+    localStorage.setItem("lang", lang);
+    document.body.style.opacity = 1;
+    }, 120);
+    }
+    
+    function detectLang() {
+    const saved =
+    localStorage.getItem("lang");
+    if (saved) return saved;
+    
+    const userLang = navigator.language || navigator.userLanguage;
+    
+    if (userLang.startsWith("id"))
+    return "id";
+    if (userLang.startsWith("ja"))
+    return "jp";
+    return "en";
+    }
+    
+    function getDepth() {
+    return Math.random();
+    }
+    
+    function startBubble() {
+    clearBG();
+    bgInterval = setInterval(() => {
     if (currentBG !== "bubble") return;
-
-    const bubble = document.createElement("span");
-
-    const size = Math.random() * 15 + 10;
-    bubble.style.width = size + "px";
-    bubble.style.height = size + "px";
-    bubble.style.left = Math.random() * 100 + "%";
-
-    bubble.style.animationDuration = (Math.random() * 10 + 10) + "s";
-    bubble.style.setProperty("--drift", (Math.random()*80-40)+"px");
-
-    document.querySelector(".bg").appendChild(bubble);
-
+    
+    const bubble = document.createElement("span");  
+    
+    const depth = Math.random();
+    
+    const size = 10 + depth * 20;  
+    bubble.style.width = size + "px";  
+    bubble.style.height = size + "px";  
+    bubble.style.left = Math.random() * 100 + "%";  
+    
+    bubble.style.animationDuration = (10 + (1 - depth) * 10) + "s";
+    const drift = (Math.random() - 0.5) * 100;
+    bubble.style.setProperty("--drift", drift + "px");
+    bubble.style.opacity = 0.15 + depth * 0.4;
+    bubble.style.filter = `blur(${(1 - depth) * 2}px)`;
+    bubble.style.backdropFilter = `blur(${(1 - depth) * 3}px)`;
+    
+    let layer;
+    if (depth < 0.33) layer = ".back";
+    else if (depth < 0.66) layer = ".mid";
+    else layer = ".front";
+    
+    document.querySelector(layer).appendChild(bubble);
+    
     setTimeout(() => bubble.remove(), 15000);
+    
+    }, 1200);
+    }
+    
+    function startRain() {
+    clearBG();
+    bgInterval = setInterval(() => {
+      if (currentBG !== "rain") return;
+    
+      const drop = document.createElement("div");
+      drop.className = "rain";
+    
+      const depth = Math.random();
+    
+      drop.style.left = Math.random() * 100 + "%";  
+      const speed = 0.3 + (1 - depth)*0.6;
+      drop.style.animationDuration = speed + "s";
+    
+      drop.style.opacity = 0.2 + depth * 0.6;
+    
+      drop.style.height = 10 + depth*20 + "px";
+    
+      let layer;
+      if (depth < 0.5) layer = ".back";
+      else if (depth < 0.8) layer = ".mid";
+      else layer = ".front";
+    
+    const rect = drop.getBoundingClientRect();
+    
+      document.querySelector(layer).appendChild(drop);
+    
+      setTimeout(() => drop.remove(), 1500);
+    }, 80);
+    }
+    
+    function startSnow() {
+    clearBG();
+    
+    bgInterval = setInterval(() => {
+      if (currentBG !== "snow") return;
+    
+      const el = document.createElement("div");
+      el.className = "snow";
+    
+      const depth = Math.random();
+    
+      el.style.left = Math.random() * 100 + "%";
+    
+      const size = 4 + depth * 6;
+      el.style.width = size + "px";
+      el.style.height = size + "px";
+    
+      const speed = 6 + (1 - depth) * 5;
+      el.style.animationDuration = speed + "s";
+    
+      el.style.opacity = 0.3 + depth * 0.5;
+    
+      let layer;
+      if (depth < 0.5) layer = ".back";
+      else if (depth < 0.8) layer = ".mid";
+      else layer = ".front";
+    
+      document.querySelector(layer).appendChild(el);
+    
+      setTimeout(() => el.remove(), 8000);
+    
+    }, 200);
+    }
+    
+    function startFish() {
+    clearBG();
+    
+    bgInterval = setInterval(() => {
+      if (currentBG !== "fish") return;
+    
+      const el = document.createElement("div");
+      el.classList.add("fish-el");
+      const depth = Math.random();
+    
+      el.style.position = "absolute";
+      el.style.background = "rgba(120,180,255,0.4)";
+      el.style.borderRadius = "10px";
+    
+      const width = 20 + depth * 40;
+      const height = 10 + depth * 10;
+    
+      el.style.width = width + "px";
+      el.style.height = height + "px";
+      el.style.top = Math.random() * 80 + "%";
+    
+      const speed = 10 + (1 - depth) * 10;
+      el.style.opacity = 0.2 + depth * 0.5;
+    
+      const state = {
+    x: -10, // start off-screen
+    y: Math.random() * 80,
+    speed: 0.08 + Math.random() * 0.012, // base speed
+    dashBoost: 0
+    };
+    
+    el.dataset.state = JSON.stringify(state);
+    
+      let layer;
+      if (depth < 0.33) layer = ".back";
+      else if (depth < 0.66) layer = ".mid";
+      else layer = ".front";
+    
+      document.querySelector(layer).appendChild(el);
+    
+      setTimeout(() => el.remove(), 20000);
+    
+    }, 1200);
+    }
+    
+    function updateFish() {
+    const fishes = document.querySelectorAll(".fish-el");
+    
+    fishes.forEach(el => {
+      let state = JSON.parse(el.dataset.state);
+    
+      // apply dash boost decay
+      if (state.dashBoost > 0) {
+        state.dashBoost *= 0.9;
+        if (state.dashBoost < 0.001) state.dashBoost = 0;
+      }
+    
+    const forward = state.speed;
+    const dash = state.dashVX || 0;
+    
+    state.x += state.speed + (state.dashVX || 0);
+    
+    state.dashVX = (state.dashVX || 0) * 0.85;
+    state.dashVY = (state.dashVY || 0) * 0.85;
+    
+    // stop small movement
+    if (Math.abs(state.dashVX) < 0.01) state.dashVX = 0;
+    if (Math.abs(state.dashVY) < 0.01) state.dashVY = 0;
+    
+      // loop back when off screen
+      if (state.x > 110) {
+        state.x = -10;
+      }
+    
+      // apply position
+      el.style.left = state.x + "%";
+      el.style.top = state.y + "%";
+    
+      el.dataset.state = JSON.stringify(state);
+    });
+    
+    requestAnimationFrame(updateFish);
+    }
+    
+    document.addEventListener("click", handleInteraction);
+    
+    function handleInteraction(e) {
+    // 🫧 Bubble
+    if (currentBG === "bubble" && e.target.tagName === "SPAN") {
+      const bubble = e.target;
+      
+      // 1. Get position for the burst
+      const rect = bubble.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+    
+      // 2. Create particles
+      createBurst(centerX, centerY);
+    
+      // 3. Play pop animation and remove
+      bubble.classList.add("pop");
+      // Disable pointer events so it can't be clicked twice
+      bubble.style.pointerEvents = "none"; 
+      
+      setTimeout(() => bubble.remove(), 400);
+    }
+    
+    // ❄️ Snow
+    if (currentBG === "snow") {
+    const snow = e.target.closest(".snow");
+    if (!snow) return;
+    
+    const stain = document.createElement("div");
+    stain.className = "snow-stain";
+    
+    const rect = snow.getBoundingClientRect();
+    stain.style.left = rect.left + "px";
+    stain.style.top = rect.top + "px";
+    
+    document.body.appendChild(stain);
+    setTimeout(() => stain.remove(), 600);
+    }
+    
+    // 🐟 Fish dash
+    if (currentBG === "fish") {
+    const fish = e.target.closest(".fish-el");
+    if (!fish) return;
+    
+    let state = JSON.parse(fish.dataset.state);
+    
+    // 🧠 get click position
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+    
+    const rect = fish.getBoundingClientRect();
+    const fishX = rect.left;
+    const fishY = rect.top;
+    
+    // 👉 direction away from click
+    const dx = fishX - clickX;
+    const dy = fishY - clickY;
+    
+    const length = Math.sqrt(dx * dx + dy * dy) || 1;
+    
+    // normalize
+    const dirX = dx / length;
+    const dirY = dy / length;
+    
+    // only horizontal escape
+    state.dashVX = 2 + Math.random() * 5;
+    state.dashVX *= 0.75;
+    
+    // ❌ remove vertical reaction
+    state.dashVY = 0;
+    
+    // visual feedback
+      fish.style.transform = "scale(1.1)";
+    
+    setTimeout(() => {
+      fish.style.transform = "";
+      fish.style.filter = "";
+    }, 150);
+    
+    fish.dataset.state = JSON.stringify(state);
+    }
+    }
+    
+    function createBurst(x, y) {
+    const amount = 8;
+    for (let i = 0; i < amount; i++) {
+      const p = document.createElement("i");
+      p.classList.add("particle");
+      
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = 20 + Math.random() * 40;
+      const xDist = Math.cos(angle) * velocity + "px";
+      const yDist = Math.sin(angle) * velocity + "px";
+    
+      p.style.left = x + "px";
+      p.style.top = y + "px";
+      p.style.setProperty("--x", xDist);
+      p.style.setProperty("--y", yDist);
+      p.style.animation = "particle-fly 0.4s ease-out forwards";
+    
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 400);
+    }
+    }
+    
+    let bgInterval;
+    
+    function clearBG() {
+    document.querySelector(".back").innerHTML = "";
+    document.querySelector(".mid").innerHTML = "";
+    document.querySelector(".front").innerHTML = "";
+    
+    if (bgInterval) clearInterval(bgInterval);
+    }
+    
+    function playModeTransition() {
+    const container = document.querySelector(".mode-transition");
+    
+    for (let i = 0; i < 12; i++) {
+      const bubble = document.createElement("span");
+    
+    const size = Math.random() * 200 + 100;
+    
+      bubble.style.width = size + "px";
+      bubble.style.height = size + "px";
+    
+      bubble.style.left = Math.random() * 100 + "%";
+      bubble.style.top = "100%"; // semua dari bawah naik
+    
+      bubble.style.animationDuration = (0.8 + Math.random() * 0.6) + "s";
+    
+      container.appendChild(bubble);
+    
+      setTimeout(() => bubble.remove(), 1200);
+    }
+    }
+    
+    let currentMode = "default";
+    
+    function setMode(mode) {
+    playModeTransition(); // 🔥 trigger dulu
+    
+    setTimeout(() => {
+      currentMode = mode;
+      localStorage.setItem("mode", mode);
+    
+      document.body.classList.remove("mode-light", "mode-dark");
+    
+      if (mode === "light") document.body.classList.add("mode-light");
+      if (mode === "dark") document.body.classList.add("mode-dark");
+    
+    }, 200); // delay dikit biar bubble mulai dulu
+    }
+    
+</script>
 
-  }, 1200);
-}
-
-function startRain() {
-  bgInterval = setInterval(() => {
-    if (currentBG !== "rain") return;
-
-    const drop = document.createElement("div");
-    drop.className = "rain";
-
-    drop.style.left = Math.random() * 100 + "%";
-    drop.style.animationDuration = (Math.random()*1+0.5)+"s";
-
-    document.querySelector(".bg").appendChild(drop);
-
-    setTimeout(() => drop.remove(), 1500);
-  }, 80);
-}
-
-function startSnow() {
-  bgInterval = setInterval(() => {
-    if (currentBG !== "snow") return;
-
-    const snow = document.createElement("div");
-    snow.className = "snow";
-
-    snow.style.left = Math.random() * 100 + "%";
-    snow.style.animationDuration = (Math.random()*5+5)+"s";
-
-    document.querySelector(".bg").appendChild(snow);
-
-    setTimeout(() => snow.remove(), 8000);
-  }, 200);
-}
-
-function startFish() {
-  bgInterval = setInterval(() => {
-    if (currentBG !== "fish") return;
-
-    const fish = document.createElement("div");
-    fish.className = "fish";
-
-    fish.style.top = Math.random()*80 + "%";
-    fish.style.animationDuration = (Math.random()*10+10)+"s";
-
-    document.querySelector(".bg").appendChild(fish);
-
-    setTimeout(() => fish.remove(), 20000);
-  }, 1200);
-}
-
-let bgInterval;
-
-function clearBG() {
-  const bg = document.querySelector(".bg");
-  bg.innerHTML = "";
-
-  if (bgInterval) clearInterval(bgInterval);
-}
-
-  </script>
 </html>
